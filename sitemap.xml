@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://oresoftware.com/resume/</loc>
+    <lastmod>2021-10-05T15:32:53-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/contact/</loc>
+    <lastmod>2021-10-05T12:18:24-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/team/</loc>
+    <lastmod>2021-10-05T12:18:24-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/blog/</loc>
+    <lastmod>2021-10-05T09:44:34-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/post/hello-world/</loc>
+    <lastmod>2021-10-05T09:39:43-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/</loc>
+    <lastmod>2021-10-05T09:39:43-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/post/</loc>
+    <lastmod>2021-10-05T09:39:43-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/about/</loc>
+    <lastmod>2021-10-05T09:38:20-07:00</lastmod>
+  </url><url>
+    <loc>http://oresoftware.com/categories/</loc>
+  </url><url>
+    <loc>http://oresoftware.com/people/</loc>
+  </url><url>
+    <loc>http://oresoftware.com/tags/</loc>
+  </url>
+</urlset>

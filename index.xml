@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ORESoftware</title>
+    <link>http://oresoftware.com/</link>
+    <description>Recent content on ORESoftware</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Oct 2021 09:39:43 -0700</lastBuildDate><atom:link href="http://oresoftware.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resume</title>
+      <link>http://oresoftware.com/resume/</link>
+      <pubDate>Tue, 05 Oct 2021 15:32:53 -0700</pubDate>
+      
+      <guid>http://oresoftware.com/resume/</guid>
+      <description>     console.log(&#39;check me out&#39;); (async () = { const pdfViewer = await window.Accusoft.PdfViewerControl.create({ sourceDocument: &#39;https://oresoftware.com/docs/Alexander_Mills.resume.2021.pdf&#39;, container: document.getElementById(&#39;viewer&#39;) }); })();   </description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>http://oresoftware.com/contact/</link>
+      <pubDate>Tue, 05 Oct 2021 12:18:24 -0700</pubDate>
+      
+      <guid>http://oresoftware.com/contact/</guid>
+      <description>For inquiries please contact Alexander at:
+ email: alex@oresoftware.com</description>
+    </item>
+    
+    <item>
+      <title>Team</title>
+      <link>http://oresoftware.com/team/</link>
+      <pubDate>Tue, 05 Oct 2021 12:18:24 -0700</pubDate>
+      
+      <guid>http://oresoftware.com/team/</guid>
+      <description>Consultants     Alexander Mills Alexander Mills is a software developer with 10+ years of experience in engineering and product design. Alex has experience in both B2B and B2C industries from Fortune 500 companies to startups, government contracting and also government intelligence agencies. Alex is an expert with Node.js, TypeScript, Golang and all things Docker. He has experience in back-end software roles, including devops, SRE, data engineering, release engineering, platform engineering, etc.</description>
+    </item>
+    
+    <item>
+      <title>Blog</title>
+      <link>http://oresoftware.com/blog/</link>
+      <pubDate>Tue, 05 Oct 2021 09:44:34 -0700</pubDate>
+      
+      <guid>http://oresoftware.com/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>New site</title>
+      <link>http://oresoftware.com/post/hello-world/</link>
+      <pubDate>Tue, 05 Oct 2021 09:39:43 -0700</pubDate>
+      
+      <guid>http://oresoftware.com/post/hello-world/</guid>
+      <description>This site is under construction as of October 2021. Please check back for updates.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://oresoftware.com/about/</link>
+      <pubDate>Tue, 05 Oct 2021 09:38:20 -0700</pubDate>
+      
+      <guid>http://oresoftware.com/about/</guid>
+      <description>ORESoftware is a developer shop and IT consultancy.
+Our focus is on complex people-oriented systems, where we leverage operations research techniques and mathematical programming to design elegant solutions.
+Currently working with naturally collaborative industries to create B2B software that allows for more facilitated intercommunication between business organizations.
+Expertise in:
+ Software Architecture Data Pipelines and Data Engineering Cloud software including: GCP, AWS Devops/Production on clustering technologies (eg: kubernetes, apache mesos) Asynchronous and evented systems Machine Learning Data Visualization  </description>
+    </item>
+    
+    <item>
+      <title>People2</title>
+      <link>http://oresoftware.com/people/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://oresoftware.com/people/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on ORESoftware</title>
+    <link>http://oresoftware.com/post/</link>
+    <description>Recent content in Posts on ORESoftware</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 05 Oct 2021 09:39:43 -0700</lastBuildDate><atom:link href="http://oresoftware.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>New site</title>
+      <link>http://oresoftware.com/post/hello-world/</link>
+      <pubDate>Tue, 05 Oct 2021 09:39:43 -0700</pubDate>
+      
+      <guid>http://oresoftware.com/post/hello-world/</guid>
+      <description>This site is under construction as of October 2021. Please check back for updates.</description>
+    </item>
+    
+  </channel>
+</rss>
