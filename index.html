@@ -1,167 +1,103 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080b12">
-  <meta name="description" content="ORESoftware builds open-source developer tools, distributed systems, secure applications, simulations, and infrastructure.">
-  <meta property="og:title" content="ORESoftware — open systems, useful tools">
-  <meta property="og:description" content="Explore ORESoftware repositories and engineering organizations across tooling, infrastructure, security, media, and simulation.">
+  <meta name="description" content="Explore ORESoftware repositories and organizations spanning distributed systems, developer tooling, synchronization, media, infrastructure, and more.">
+  <meta name="theme-color" content="#07111f">
   <meta property="og:type" content="website">
+  <meta property="og:title" content="ORESoftware — Open-source systems and developer tools">
+  <meta property="og:description" content="Explore ORESoftware repositories and organizations spanning distributed systems, developer tooling, synchronization, media, infrastructure, and more.">
   <meta property="og:url" content="https://oresoftware.github.io/">
   <meta property="og:image" content="https://oresoftware.github.io/img/img.png">
-  <title>ORESoftware — open systems, useful tools</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://oresoftware.github.io/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/site.css">
+  <title>ORESoftware — Open-source systems and developer tools</title>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-
-  <header class="site-header" id="top">
-    <div class="shell header-inner">
-      <a class="brand" href="#top" aria-label="ORESoftware home">
-        <span class="brand-mark" aria-hidden="true">ORE</span>
-        <span>Software</span>
-      </a>
-
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
-        <span>Menu</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
-
-      <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
-        <a href="#featured">Popular repos</a>
-        <details class="nav-dropdown" id="project-menu">
-          <summary>Projects <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5"/></svg></summary>
-          <div class="mega-menu" id="mega-menu"></div>
-        </details>
-        <a href="#projects">Organizations</a>
-        <a href="https://github.com/ORESoftware">GitHub</a>
-        <a class="nav-cta" href="https://the1mills.github.io">Meet the mastermind</a>
+  <header class="site-header">
+    <div class="shell site-header__inner">
+      <a class="wordmark" href="/" aria-label="ORESoftware home"><span class="wordmark__glyph" aria-hidden="true">O</span><span>ORESoftware</span></a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="#projects">Projects</a>
+        <details class="nav-menu"><summary>Popular repos</summary><div id="repo-menu" class="nav-menu__panel"></div></details>
+        <details class="nav-menu nav-menu--wide"><summary>Organizations</summary><div id="org-menu" class="nav-menu__panel nav-menu__panel--grid"></div></details>
+        <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
+      <details class="mobile-nav">
+        <summary>Menu <span aria-hidden="true">☰</span></summary>
+        <nav class="mobile-nav__panel" aria-label="Mobile navigation">
+          <a href="#featured">Popular repositories</a>
+          <a href="#organizations">Project organizations</a>
+          <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">ORESoftware on GitHub <span aria-hidden="true">↗</span></a>
+          <a href="https://the1mills.github.io" target="_blank" rel="noreferrer">Alex Mills <span aria-hidden="true">↗</span></a>
+        </nav>
+      </details>
+      <a class="header-cta" href="https://the1mills.github.io" target="_blank" rel="noreferrer">Alex Mills <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
   <main id="main-content">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="shell hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow"><span></span> Open source, end to end</p>
-          <h1 id="hero-title">Useful tools.<br><em>Ambitious systems.</em></h1>
-          <p class="hero-lede">ORESoftware builds developer tooling, distributed coordination, secure applications, simulation engines, and product infrastructure—designed in the open and engineered to compose.</p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#projects">Explore the projects <span aria-hidden="true">→</span></a>
-            <a class="button button-secondary" href="https://github.com/ORESoftware">View ORESoftware on GitHub</a>
-          </div>
-          <dl class="hero-stats" aria-label="Site highlights">
-            <div><dt>4</dt><dd>featured repositories</dd></div>
-            <div><dt>21</dt><dd>project organizations</dd></div>
-            <div><dt>∞</dt><dd>room to build</dd></div>
-          </dl>
-        </div>
-
-        <div class="hero-art" aria-label="ORESoftware artwork">
-          <div class="art-glow" aria-hidden="true"></div>
-          <div class="art-frame">
-            <img src="img/img.png" alt="ORESoftware" fetchpriority="high" decoding="async">
-          </div>
-          <p class="art-caption"><span aria-hidden="true"></span> Building across runtimes, platforms, and protocols</p>
+    <section class="hero shell" aria-labelledby="hero-heading">
+      <div class="hero__copy">
+        <p class="eyebrow">Open source by ORESoftware</p>
+        <h1 id="hero-heading">Build the hard parts once. Share them everywhere.</h1>
+        <p class="hero__lede">A growing portfolio of developer tools, distributed systems, synchronization layers, infrastructure, and product experiments—designed to interoperate and built in public.</p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#projects">Explore the projects <span aria-hidden="true">↓</span></a>
+          <a class="button button--secondary" href="https://the1mills.github.io" target="_blank" rel="noreferrer">Meet the mastermind <span aria-hidden="true">↗</span></a>
         </div>
       </div>
+      <div class="hero__stats" aria-label="Project portfolio summary">
+        <div><strong>4</strong><span>popular repositories</span></div>
+        <div><strong>22</strong><span>project organizations</span></div>
+        <div><strong>Astro</strong><span>static, fast, and accessible</span></div>
+      </div>
+      <div class="hero-logo-shell"><img class="hero-logo" src="/img/img.png" width="1928" height="262" alt="ORESoftware" loading="eager" decoding="async"></div>
     </section>
 
-    <section class="section" id="featured" aria-labelledby="featured-title">
-      <div class="shell">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow"><span></span> Popular repositories</p>
-            <h2 id="featured-title">Start with the classics.</h2>
-          </div>
-          <p>Battle-tested tools for concurrency, testing, command-line configuration, and release confidence.</p>
-        </div>
-
-        <div class="card-grid featured-grid">
-          <article class="project-card featured-card">
-            <div class="card-meta"><span>Repository</span><b>01</b></div>
-            <h3><a href="https://github.com/ORESoftware/live-mutex">live-mutex</a></h3>
-            <p>An event-driven mutex and semaphore broker for coordinating Node.js processes over TCP or Unix domain sockets—without polling.</p>
-            <div class="tag-list"><span>TypeScript</span><span>Concurrency</span><span>IPC</span></div>
-            <a class="card-link" href="https://github.com/ORESoftware/live-mutex">View repository <span aria-hidden="true">↗</span></a>
-          </article>
-
-          <article class="project-card featured-card">
-            <div class="card-meta"><span>Repository</span><b>02</b></div>
-            <h3><a href="https://github.com/sumanjs/suman">SumanJS</a></h3>
-            <p>A Node.js test runner built around parallel execution, process isolation, extensible reporters, and practical CLI workflows.</p>
-            <div class="tag-list"><span>JavaScript</span><span>Testing</span><span>Tooling</span></div>
-            <a class="card-link" href="https://github.com/sumanjs/suman">View repository <span aria-hidden="true">↗</span></a>
-          </article>
-
-          <article class="project-card featured-card">
-            <div class="card-meta"><span>Repository</span><b>03</b></div>
-            <h3><a href="https://github.com/ORESoftware/flags-2-env">flags-2-env</a></h3>
-            <p>Describe command-line flags once in <code>.cli-flags.toml</code>, then map them into environment overrides through a small native core.</p>
-            <div class="tag-list"><span>C core</span><span>CLI</span><span>Polyglot</span></div>
-            <a class="card-link" href="https://github.com/ORESoftware/flags-2-env">View repository <span aria-hidden="true">↗</span></a>
-          </article>
-
-          <article class="project-card featured-card">
-            <div class="card-meta"><span>Repository</span><b>04</b></div>
-            <h3><a href="https://github.com/ORESoftware/r2g">r2g</a></h3>
-            <p>Prove packages work as real downstream dependencies before release, with repeatable tests across realistic consumer environments.</p>
-            <div class="tag-list"><span>Release QA</span><span>Node.js</span><span>Automation</span></div>
-            <a class="card-link" href="https://github.com/ORESoftware/r2g">View repository <span aria-hidden="true">↗</span></a>
-          </article>
-        </div>
+    <section id="projects" class="projects-section shell" aria-labelledby="featured-heading">
+      <div id="featured" class="section-heading">
+        <div><p class="eyebrow">Start here</p><h2 id="featured-heading">Popular repositories</h2></div>
+        <p>Focused tools that solve reusable engineering problems and anchor the wider ecosystem.</p>
       </div>
+      <div id="featured-grid" class="project-grid" aria-live="polite"></div>
     </section>
 
-    <section class="section section-projects" id="projects" aria-labelledby="projects-title">
-      <div class="shell">
-        <div class="section-heading projects-heading">
-          <div>
-            <p class="eyebrow"><span></span> Project constellation</p>
-            <h2 id="projects-title">Twenty-one directions.<br>One engineering orbit.</h2>
+    <section id="organizations" class="projects-section projects-section--orgs shell" aria-labelledby="organizations-heading">
+      <div class="section-heading section-heading--filterable">
+        <div><p class="eyebrow">The wider constellation</p><h2 id="organizations-heading">Project organizations</h2></div>
+        <div class="project-filter">
+          <label for="project-filter">Find an organization</label>
+          <div class="project-filter__control">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+            <input id="project-filter" type="search" placeholder="Search names, topics, or purpose…" autocomplete="off">
           </div>
-          <div class="filter-wrap">
-            <label for="project-filter">Find a project</label>
-            <div class="filter-box">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>
-              <input id="project-filter" type="search" placeholder="Search names, tech, or purpose…" autocomplete="off">
-            </div>
-            <p><strong id="project-count">21</strong> organizations shown</p>
-          </div>
+          <p aria-live="polite"><strong id="project-count">22</strong> organizations shown</p>
         </div>
-
-        <div class="card-grid org-grid" id="org-grid"></div>
-        <p class="no-results" id="no-results" hidden>No matching organizations. Try another project name or technology.</p>
       </div>
+      <div id="organization-grid" class="project-grid" aria-live="polite"></div>
+      <p class="no-results" id="no-results" hidden>No matching organizations. Try another name, technology, or purpose.</p>
     </section>
 
-    <section class="creator-band" aria-labelledby="creator-title">
-      <div class="shell creator-inner">
-        <div>
-          <p class="eyebrow"><span></span> Behind the orbit</p>
-          <h2 id="creator-title">Meet the mastermind behind ORESoftware.</h2>
-          <p>Projects, experiments, technical writing, and the person connecting the whole ecosystem.</p>
-        </div>
-        <a class="button button-primary" href="https://the1mills.github.io">Visit the1mills.github.io <span aria-hidden="true">↗</span></a>
-      </div>
+    <section class="maker shell" aria-labelledby="maker-heading">
+      <div><p class="eyebrow">Behind the work</p><h2 id="maker-heading">Designed and driven by Alex Mills.</h2><p>Follow the ideas, experiments, and engineering notes behind ORESoftware.</p></div>
+      <a class="button button--primary" href="https://the1mills.github.io" target="_blank" rel="noreferrer">Visit the1mills.github.io <span aria-hidden="true">↗</span></a>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="shell footer-grid">
-      <div class="footer-brand">
-        <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">ORE</span><span>Software</span></a>
-        <p>Open-source systems, tools, and product experiments built to work together.</p>
-      </div>
-      <div class="footer-links">
-        <div><h2>Explore</h2><a href="#featured">Popular repositories</a><a href="#projects">Project organizations</a><a href="https://github.com/ORESoftware">GitHub profile</a></div>
-        <div><h2>People</h2><a href="https://the1mills.github.io">The1Mills</a><a href="https://github.com/the1mills">GitHub</a></div>
-      </div>
+    <div class="shell site-footer__grid">
+      <div><a class="wordmark wordmark--footer" href="/"><span class="wordmark__glyph" aria-hidden="true">O</span><span>ORESoftware</span></a><p>Open-source infrastructure, developer tools, and product experiments built in public.</p></div>
+      <div class="footer-links"><strong>Explore</strong><a href="#featured">Popular repositories</a><a href="#organizations">Organizations</a><a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">GitHub profile ↗</a></div>
+      <div class="footer-links"><strong>Creator</strong><a href="https://the1mills.github.io" target="_blank" rel="noreferrer">the1mills.github.io ↗</a><span>The mastermind behind ORESoftware.</span><span>Built with Astro.</span></div>
     </div>
-    <div class="shell footer-bottom"><span>© <span id="current-year">2026</span> ORESoftware</span><span>Designed for wide screens. Engineered for every screen.</span></div>
+    <div class="shell site-footer__bottom"><span>© 2026 ORESoftware</span><span>Small primitives. Ambitious systems.</span></div>
   </footer>
+
+  <script type="module" src="/fallback.js"></script>
 </body>
 </html>

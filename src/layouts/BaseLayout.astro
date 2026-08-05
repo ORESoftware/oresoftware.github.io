@@ -1,0 +1,34 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+}
+
+const { title, description, canonicalPath = '/' } = Astro.props;
+const canonicalURL = new URL(canonicalPath, Astro.site ?? Astro.url);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#07111f" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content="https://oresoftware.github.io/img/img.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/site.css" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <slot />
+  </body>
+</html>
