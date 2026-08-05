@@ -1,6 +1,6 @@
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 320px);
   gap: 46px;
   padding-top: clamp(72px, 10vw, 132px);
   padding-bottom: 54px;
@@ -69,8 +69,8 @@ h1 {
 
 .button--primary {
   color: var(--accent-ink);
-  background: linear-gradient(135deg, var(--accent-strong), #63ceb5);
-  box-shadow: 0 14px 36px rgba(90, 211, 177, 0.16);
+  background: linear-gradient(135deg, var(--accent-strong), #4e9eff);
+  box-shadow: 0 14px 36px rgba(105, 180, 255, 0.2);
 }
 
 .button--secondary {
@@ -80,44 +80,74 @@ h1 {
 }
 
 .button--secondary:hover {
-  border-color: rgba(120, 231, 199, 0.45);
-  background: rgba(120, 231, 199, 0.07);
+  border-color: rgba(105, 180, 255, 0.5);
+  background: rgba(105, 180, 255, 0.09);
 }
 
-.hero__stats {
-  display: grid;
+.hero__signals {
   align-self: end;
-  gap: 1px;
-  overflow: hidden;
+  padding: 22px;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
-  background: var(--line);
+  background:
+    linear-gradient(145deg, rgba(105, 180, 255, 0.09), transparent 60%),
+    rgba(10, 27, 51, 0.9);
   box-shadow: var(--shadow);
 }
 
-.hero__stats div {
-  display: grid;
-  padding: 20px;
-  background: rgba(11, 25, 42, 0.94);
-}
-
-.hero__stats strong {
+.hero__signals-title {
+  margin: 0 0 13px;
   color: var(--text);
-  font-size: 1.45rem;
-  letter-spacing: -0.04em;
+  font-size: 0.78rem;
+  font-weight: 820;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
-.hero__stats span {
+.hero__signals ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero__signals li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #d7e4f2;
+  font-size: 0.9rem;
+}
+
+.hero__signals li::before {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  content: "";
+  background: var(--accent);
+  box-shadow: 0 0 16px rgba(105, 180, 255, 0.6);
+}
+
+.hero__signals > span {
+  display: block;
+  margin-top: 17px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.76rem;
 }
 
 .hero-logo-shell {
   grid-column: 1 / -1;
+  display: grid;
   width: 100%;
+  max-width: 100%;
   min-width: 0;
   margin-top: 32px;
   overflow: hidden;
+  place-items: center;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
   background: rgba(255, 255, 255, 0.025);
@@ -127,8 +157,10 @@ h1 {
 .hero-logo {
   display: block;
   width: min(100%, 1928px);
+  max-width: 100%;
+  min-width: 0;
   height: auto;
-  margin-inline: auto;
+  margin: 0 auto;
   object-fit: contain;
+  object-position: center;
 }
-
