@@ -1,0 +1,108 @@
+---
+import '../styles/global.css';
+import { coreProjects, featuredRepositories, projectGroups } from '../data/projects';
+
+const title = 'ORESoftware — open systems and useful tools';
+const description = 'Open-source developer tools, distributed systems, secure applications, simulations, and product infrastructure.';
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050a14" />
+  <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://oresoftware.github.io/" />
+  <meta property="og:image" content="https://oresoftware.github.io/img/img.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://oresoftware.github.io/" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <title>{title}</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="ORESoftware home"><span class="brand-mark">ORE</span><span>Software</span></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span>Menu</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">
+        <a href="#featured">Popular repos</a>
+        <details class="nav-dropdown" id="project-menu">
+          <summary>Projects <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m5 7.5 5 5 5-5" /></svg></summary>
+          <div class="mega-menu">
+            {projectGroups.map((group) => <div class="mega-group"><h2>{group}</h2>{coreProjects.filter((project) => project.group === group).map((project) => <a href={project.url}>{project.name}</a>)}</div>)}
+          </div>
+        </details>
+        <a href="#projects">Core projects</a>
+        <a href="https://github.com/ORESoftware">GitHub</a>
+        <a class="nav-cta" href="https://the1mills.github.io">The mastermind</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Open source, end to end</p>
+          <h1>Useful tools.<br /><span>Ambitious systems.</span></h1>
+          <p class="hero-lede">ORESoftware builds developer tooling, distributed coordination, secure applications, simulations, and product infrastructure—designed in the open and built to compose.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#projects">Explore core projects <span aria-hidden="true">→</span></a><a class="button button-secondary" href="https://github.com/ORESoftware">View GitHub</a></div>
+        </div>
+        <div class="hero-visual">
+          <div class="visual-frame"><img src="/img/img.png" alt="ORESoftware" width="620" height="620" fetchpriority="high" decoding="async" /></div>
+          <p class="visual-note">Building across runtimes, platforms, and protocols</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="featured">
+      <div class="shell">
+        <div class="section-heading"><div><p class="eyebrow">Popular repositories</p><h2>Start with the classics.</h2></div><p>Focused tools for concurrency, testing, configuration, and release confidence.</p></div>
+        <div class="card-grid">
+          {featuredRepositories.map((repo) => <article class="card"><p class="card-label">Repository</p><h3><a href={repo.url}>{repo.name}</a></h3><p class="card-description">{repo.description}</p><div class="tag-list">{repo.tags.map((tag) => <span>{tag}</span>)}</div><a class="card-link" href={repo.url}>View repository <span aria-hidden="true">↗</span></a></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section projects-section" id="projects">
+      <div class="shell">
+        <div class="section-heading projects-heading">
+          <div><p class="eyebrow">Core projects</p><h2>One ecosystem, many useful parts.</h2></div>
+          <div class="filter-wrap"><label for="project-filter">Find a project</label><div class="filter-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m16.5 16.5 4 4" /></svg><input id="project-filter" type="search" placeholder="Search names, technology, or purpose…" autocomplete="off" /></div></div>
+        </div>
+        <div class="card-grid" id="project-grid">
+          {coreProjects.map((project) => <article class="card project-card" data-search={`${project.name} ${project.label} ${project.description} ${project.tags.join(' ')}`.toLowerCase()}><p class="card-label">{project.label}</p><h3><a href={project.url}>{project.name}</a></h3><p class="card-description">{project.description}</p><div class="tag-list">{project.tags.map((tag) => <span>{tag}</span>)}</div><a class="card-link" href={project.url}>Explore organization <span aria-hidden="true">↗</span></a></article>)}
+        </div>
+        <p class="no-results" id="no-results" hidden>No matching projects. Try another name or technology.</p>
+      </div>
+    </section>
+
+    <section class="creator-band">
+      <div class="shell creator-inner"><div class="creator-copy"><p class="eyebrow">Behind the work</p><h2>Meet the mastermind behind ORESoftware.</h2><p>Projects, experiments, technical writing, and the person connecting the ecosystem.</p></div><a class="button button-primary" href="https://the1mills.github.io">Visit the1mills.github.io <span aria-hidden="true">↗</span></a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid"><div class="footer-brand"><a class="brand" href="#top"><span class="brand-mark">ORE</span><span>Software</span></a><p>Open-source systems, tools, and product experiments built to work together.</p></div><div class="footer-links"><div><h2>Explore</h2><a href="#featured">Popular repositories</a><a href="#projects">Core projects</a><a href="https://github.com/ORESoftware">GitHub profile</a></div><div><h2>People</h2><a href="https://the1mills.github.io">The1Mills</a><a href="https://github.com/the1mills">GitHub</a></div></div></div>
+    <div class="shell footer-bottom"><span>© {year} ORESoftware</span><span>Built with Astro. Published without Jekyll or Hugo.</span></div>
+  </footer>
+
+  <script>
+    const nav = document.querySelector('#primary-nav');
+    const toggle = document.querySelector('.nav-toggle');
+    const menu = document.querySelector('#project-menu');
+    const filter = document.querySelector('#project-filter');
+    const noResults = document.querySelector('#no-results');
+    toggle?.addEventListener('click', () => { const open = nav?.classList.toggle('is-open') ?? false; toggle.setAttribute('aria-expanded', String(open)); });
+    nav?.addEventListener('click', (event) => { if ((event.target as Element).closest('a') && matchMedia('(max-width: 980px)').matches) { nav.classList.remove('is-open'); toggle?.setAttribute('aria-expanded', 'false'); } });
+    filter?.addEventListener('input', () => { const term = (filter as HTMLInputElement).value.trim().toLowerCase(); let visible = 0; document.querySelectorAll<HTMLElement>('.project-card').forEach((card) => { const match = !term || (card.dataset.search ?? '').includes(term); card.hidden = !match; if (match) visible += 1; }); if (noResults) noResults.hidden = visible !== 0; });
+    document.addEventListener('click', (event) => { if (menu?.open && !menu.contains(event.target as Node)) menu.open = false; });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { if (menu) menu.open = false; nav?.classList.remove('is-open'); toggle?.setAttribute('aria-expanded', 'false'); } });
+  </script>
+</body>
+</html>

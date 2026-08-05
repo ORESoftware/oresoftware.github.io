@@ -1,0 +1,32 @@
+export const featuredRepositories = [
+  { name: 'live-mutex', description: 'Event-driven mutexes and semaphores for coordinating Node.js processes without polling.', tags: ['TypeScript', 'Concurrency', 'IPC'], url: 'https://github.com/ORESoftware/live-mutex' },
+  { name: 'SumanJS', description: 'A parallel Node.js test runner with process isolation, extensible reporting, and practical CLI workflows.', tags: ['JavaScript', 'Testing', 'Tooling'], url: 'https://github.com/sumanjs/suman' },
+  { name: 'flags-2-env', description: 'Define command-line flags once and expose consistent environment overrides across languages.', tags: ['CLI', 'Configuration', 'Polyglot'], url: 'https://github.com/ORESoftware/flags-2-env' },
+  { name: 'r2g', description: 'Validate packages as real downstream dependencies before release in realistic consumer environments.', tags: ['Release QA', 'Node.js', 'Automation'], url: 'https://github.com/ORESoftware/r2g' }
+] as const;
+
+export const coreProjects = [
+  { name: 'fiducia-cloud', label: 'Distributed systems', description: 'Locks, leases, consensus-aware scheduling, and resilient cron execution.', tags: ['Consensus', 'Coordination', 'Cloud'], url: 'https://github.com/fiducia-cloud', group: 'Systems & developer tools' },
+  { name: 'cliptown', label: 'Productivity / sync', description: 'Secure cross-device clipboard history and pinned snippets.', tags: ['Clipboard', 'Flutter', 'Sync'], url: 'https://github.com/cliptown', group: 'Products & platforms' },
+  { name: 'sonus-auris', label: 'Audio / security', description: 'Privacy-first continuous audio capture with encrypted, searchable storage.', tags: ['Audio', 'Encryption', 'Flutter + Rust'], url: 'https://github.com/sonus-auris', group: 'Products & platforms' },
+  { name: 'memebank', label: 'Media / search', description: 'OCR, embeddings, and pluggable storage for visual media libraries.', tags: ['Vision', 'Search', 'Storage'], url: 'https://github.com/memebank', group: 'Products & platforms' },
+  { name: 'daedalus-fab', label: 'Manufacturing / planning', description: 'Planning for additive, subtractive, and hybrid fabrication.', tags: ['Fabrication', 'Planning', 'Rust'], url: 'https://github.com/daedalus-fab', group: 'Simulation & hardware' },
+  { name: 'quaestor-ledger', label: 'Billing / ledger', description: 'Shared metering, subscriptions, invoices, and financial events.', tags: ['Billing', 'Ledger', 'Platform'], url: 'https://github.com/quaestor-ledger', group: 'Products & platforms' },
+  { name: 'scintilla-run', label: 'Runtime / serverless', description: 'A BEAM-powered lambda runtime with warm processes and durable workflows.', tags: ['BEAM', 'Serverless', 'Workflows'], url: 'https://github.com/scintilla-run', group: 'Systems & developer tools' },
+  { name: '3FA-app', label: 'Identity / security', description: 'Multi-device authentication and secure messaging with Signal-style keys.', tags: ['Identity', 'Signal protocol', 'Flutter'], url: 'https://github.com/3FA-app', group: 'Products & platforms' },
+  { name: 'zed-pkg', label: 'Developer tooling', description: 'Source-first package management for polyglot repositories.', tags: ['Packages', 'Polyglot', 'Git'], url: 'https://github.com/zed-pkg', group: 'Systems & developer tools' },
+  { name: 'akrion-sim', label: 'Gaming / simulation', description: 'Football simulation using multi-agent control, RL, MPC, and self-play.', tags: ['Gaming', 'Simulation', 'Control'], url: 'https://github.com/akrion-sim', group: 'Simulation & hardware' },
+  { name: 'declarative-migrations', label: 'Data / migrations', description: 'ORM-agnostic PostgreSQL catalog diffs and reviewable SQL.', tags: ['PostgreSQL', 'Rust', 'Migrations'], url: 'https://github.com/declarative-migrations', group: 'Systems & developer tools' },
+  { name: 'discrete-event-systems', label: 'Simulation / optimization', description: 'Simulation engines and browser labs for event-driven systems.', tags: ['Simulation', 'Optimization', 'Rust'], url: 'https://github.com/discrete-event-systems', group: 'Simulation & hardware' },
+  { name: 'drone-mngr', label: 'Robotics / control', description: 'Control-plane, web, embedded, and MCP components for drones.', tags: ['Robotics', 'Embedded', 'Control'], url: 'https://github.com/drone-mngr', group: 'Simulation & hardware' },
+  { name: 'embedded-alerts', label: 'Embedded / alerts', description: 'Reusable alert surfaces and delivery workflows for connected products.', tags: ['Alerts', 'Embedded', 'Components'], url: 'https://github.com/embedded-alerts', group: 'Products & platforms' },
+  { name: 'fanwaave', label: 'Social / marketing', description: 'Fan communities, creator engagement, and campaign activation.', tags: ['Community', 'Marketing', 'Creators'], url: 'https://github.com/fanwaave', group: 'Products & platforms' },
+  { name: 'evento-globolo', label: 'Events / community', description: 'Global event discovery and management for organizers and attendees.', tags: ['Events', 'Discovery', 'Community'], url: 'https://github.com/evento-globolo', group: 'Products & platforms' },
+  { name: 'hypesiege', label: 'Social / marketing', description: 'Social publishing, content scheduling, and campaign coordination.', tags: ['Social', 'Marketing', 'Scheduling'], url: 'https://github.com/hypesiege', group: 'Products & platforms' },
+  { name: 'streempilot', label: 'Streaming / production', description: 'Browser-first live production and multistreaming with WebRTC.', tags: ['WebRTC', 'Streaming', 'Browser'], url: 'https://github.com/StreemPilot', group: 'Products & platforms' },
+  { name: 'file-tunnel', label: 'Networking / security', description: 'Secure file movement through explicit tunnels and reusable clients.', tags: ['Networking', 'Transfer', 'Security'], url: 'https://github.com/file-tunnel', group: 'Systems & developer tools' },
+  { name: 'opto-sync', label: 'Data / sync', description: 'Offline-first synchronization across browser, mobile, and server stores.', tags: ['Sync', 'Offline-first', 'Data'], url: 'https://github.com/opto-sync', group: 'Systems & developer tools' },
+  { name: 'sagitta-stack', label: 'Full stack / runtime', description: 'A coherent path through server rendering, web, mobile, and isolates.', tags: ['Dart', 'Flutter', 'Full stack'], url: 'https://github.com/sagitta-stack', group: 'Systems & developer tools' }
+] as const;
+
+export const projectGroups = ['Systems & developer tools', 'Products & platforms', 'Simulation & hardware'] as const;
