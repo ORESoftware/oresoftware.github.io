@@ -1,0 +1,188 @@
+{
+  "featuredRepositories": [
+    {
+      "name": "live-mutex",
+      "href": "https://github.com/ORESoftware/live-mutex",
+      "kind": "Repository",
+      "description": "Concurrency primitives for coordinating asynchronous work safely across processes and services.",
+      "tags": ["Node.js", "Concurrency"]
+    },
+    {
+      "name": "sumanjs",
+      "href": "https://github.com/ORESoftware/sumanjs",
+      "kind": "Repository",
+      "description": "A JavaScript testing ecosystem built for explicit, scalable, and observable test workflows.",
+      "tags": ["JavaScript", "Testing"]
+    },
+    {
+      "name": "flags-2-env",
+      "href": "https://github.com/ORESoftware/flags-2-env",
+      "kind": "Repository",
+      "description": "Turn command-line flags into predictable environment configuration for tools and services.",
+      "tags": ["CLI", "Configuration"]
+    },
+    {
+      "name": "r2g",
+      "href": "https://github.com/ORESoftware/r2g",
+      "kind": "Repository",
+      "description": "Release-readiness tooling that validates packages and catches publishing problems before shipment.",
+      "tags": ["Release", "Automation"]
+    }
+  ],
+  "organizations": [
+    {
+      "name": "fiducia-cloud",
+      "href": "https://github.com/fiducia-cloud",
+      "kind": "Organization",
+      "description": "Distributed locks, leases, consensus, and dependable cron coordination for cloud systems.",
+      "tags": ["Distributed systems", "Rust"]
+    },
+    {
+      "name": "cliptown",
+      "href": "https://github.com/cliptown",
+      "kind": "Organization",
+      "description": "Cross-device clipboard history, pinning, search, and secure synchronization.",
+      "tags": ["Productivity", "Sync"]
+    },
+    {
+      "name": "sonus-auris",
+      "href": "https://github.com/sonus-auris",
+      "kind": "Organization",
+      "description": "Always-on audio capture with local-first retention and end-to-end protection.",
+      "tags": ["Audio", "Privacy"]
+    },
+    {
+      "name": "memebank",
+      "href": "https://github.com/memebank",
+      "kind": "Organization",
+      "description": "A searchable meme library powered by OCR, semantic tags, embeddings, and cloud storage.",
+      "tags": ["Vision", "Search"]
+    },
+    {
+      "name": "daedalus-fab",
+      "href": "https://github.com/daedalus-fab",
+      "kind": "Organization",
+      "description": "Fabrication and automation systems for turning complex designs into repeatable workflows.",
+      "tags": ["Fabrication", "Automation"]
+    },
+    {
+      "name": "quaestor-ledger",
+      "href": "https://github.com/quaestor-ledger",
+      "kind": "Organization",
+      "description": "Shared billing, ledger, and financial infrastructure for a family of applications.",
+      "tags": ["Billing", "Ledger"]
+    },
+    {
+      "name": "scintilla-run",
+      "href": "https://github.com/scintilla-run",
+      "kind": "Organization",
+      "description": "Runtime and developer tooling for fast, observable, and dependable distributed jobs.",
+      "tags": ["Runtime", "Observability"]
+    },
+    {
+      "name": "3fa-app",
+      "href": "https://github.com/3FA-app",
+      "kind": "Organization",
+      "description": "Multi-device authentication and encrypted coordination beyond ordinary two-factor flows.",
+      "tags": ["Authentication", "Encryption"]
+    },
+    {
+      "name": "zed-pkg",
+      "href": "https://github.com/zed-pkg",
+      "kind": "Organization",
+      "description": "A fast cross-platform package manager with reproducible manifests and Git interoperability.",
+      "tags": ["Packages", "Developer tools"]
+    },
+    {
+      "name": "akrion-sim",
+      "href": "https://github.com/akrion-sim",
+      "kind": "Organization",
+      "description": "Simulation tooling for exploring systems, scenarios, decisions, and agent behavior.",
+      "tags": ["Simulation", "Agents"]
+    },
+    {
+      "name": "declarative-migrations",
+      "href": "https://github.com/declarative-migrations",
+      "kind": "Organization",
+      "description": "Schema and data migrations expressed as reviewable, repeatable declarations.",
+      "tags": ["Databases", "Migrations"]
+    },
+    {
+      "name": "discrete-event-systems",
+      "href": "https://github.com/discrete-event-systems",
+      "kind": "Organization",
+      "description": "Libraries and applications for modeling event-driven and time-ordered systems.",
+      "tags": ["Events", "Modeling"]
+    },
+    {
+      "name": "drone-mngr",
+      "href": "https://github.com/drone-mngr",
+      "kind": "Organization",
+      "description": "Fleet operations, telemetry, mission planning, and coordination for drones.",
+      "tags": ["Drones", "Telemetry"]
+    },
+    {
+      "name": "embedded-alerts",
+      "href": "https://github.com/embedded-alerts",
+      "kind": "Organization",
+      "description": "Portable alerting components that bring operational feedback directly into products.",
+      "tags": ["Alerts", "Components"]
+    },
+    {
+      "name": "fanwaave",
+      "href": "https://github.com/fanwaave",
+      "kind": "Organization",
+      "description": "Community and engagement software connecting creators, audiences, and live moments.",
+      "tags": ["Community", "Creators"]
+    },
+    {
+      "name": "evento-globolo",
+      "href": "https://github.com/evento-globolo",
+      "kind": "Organization",
+      "description": "Event discovery and coordination designed for globally distributed communities.",
+      "tags": ["Events", "Community"]
+    },
+    {
+      "name": "hypesiege",
+      "href": "https://github.com/hypesiege",
+      "kind": "Organization",
+      "description": "Social publishing workflows for planning, scheduling, and distributing campaigns.",
+      "tags": ["Social media", "Scheduling"]
+    },
+    {
+      "name": "streempilot",
+      "href": "https://github.com/StreemPilot",
+      "kind": "Organization",
+      "description": "Browser-first live production and multistreaming with real-time collaboration.",
+      "tags": ["Streaming", "WebRTC"]
+    },
+    {
+      "name": "file-tunnel",
+      "href": "https://github.com/file-tunnel",
+      "kind": "Organization",
+      "description": "Secure, reliable file transfer and tunneling across constrained networks.",
+      "tags": ["Networking", "Files"]
+    },
+    {
+      "name": "opto-sync",
+      "href": "https://github.com/opto-sync",
+      "kind": "Organization",
+      "description": "Offline-first synchronization across web, mobile, desktop, and backend data stores.",
+      "tags": ["Offline-first", "Sync"]
+    },
+    {
+      "name": "sagitta-stack",
+      "href": "https://github.com/sagitta-stack",
+      "kind": "Organization",
+      "description": "A cohesive application and infrastructure stack for shipping services quickly.",
+      "tags": ["Platform", "Infrastructure"]
+    },
+    {
+      "name": "usa-acc",
+      "href": "https://github.com/usa-acc",
+      "kind": "Organization",
+      "description": "Open technology for American abundance, infrastructure, and accelerated building capacity.",
+      "tags": ["Open source", "Acceleration"]
+    }
+  ]
+}
