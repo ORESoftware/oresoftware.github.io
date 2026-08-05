@@ -44,6 +44,16 @@ const { repositories, organizations } = Astro.props;
       <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">GitHub</a>
     </nav>
 
+    <details class="mobile-nav">
+      <summary>Menu <span aria-hidden="true">☰</span></summary>
+      <nav class="mobile-nav__panel" aria-label="Mobile navigation">
+        <a href="#featured">Popular repositories</a>
+        <a href="#organizations">Project organizations</a>
+        <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">ORESoftware on GitHub <span aria-hidden="true">↗</span></a>
+        <a href="https://the1mills.github.io" target="_blank" rel="noreferrer">Alex Mills <span aria-hidden="true">↗</span></a>
+      </nav>
+    </details>
+
     <a class="header-cta" href="https://the1mills.github.io" target="_blank" rel="noreferrer">
       Alex Mills <span aria-hidden="true">↗</span>
     </a>

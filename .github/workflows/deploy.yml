@@ -1,4 +1,4 @@
-name: Build and deploy Astro site
+name: Build Astro and publish GitHub Pages
 
 on:
   push:
@@ -7,13 +7,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -21,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
@@ -30,26 +30,23 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Validate checked-in Pages snapshot
+      - name: Validate source and Pages fallback
         run: npm run validate
 
       - name: Build Astro
         run: npm run build
 
-      - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: dist
-
-  deploy:
-    if: github.event_name != 'pull_request'
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+      - name: Publish Astro output to the legacy Pages branch root
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          npm run sync:pages
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- index.html favicon.svg robots.txt site.css .nojekyll CNAME img styles fallback.js
+          if [ -d _astro ]; then git add -A -- _astro; fi
+          if git diff --cached --quiet; then
+            echo "The checked-in Pages snapshot already matches the Astro build."
+          else
+            git commit -m "chore: publish Astro Pages snapshot [skip ci]"
+            git push origin HEAD:main
+          fi

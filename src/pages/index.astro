@@ -13,7 +13,7 @@ const description = 'Explore ORESoftware repositories and organizations spanning
 <BaseLayout title={title} description={description}>
   <SiteHeader repositories={featuredRepositories} organizations={organizations} />
 
-  <main>
+  <main id="main-content">
     <section class="hero shell" aria-labelledby="hero-heading">
       <div class="hero__copy">
         <p class="eyebrow">Open source by ORESoftware</p>
@@ -64,17 +64,25 @@ const description = 'Explore ORESoftware repositories and organizations spanning
     </section>
 
     <section id="organizations" class="projects-section projects-section--orgs shell" aria-labelledby="organizations-heading">
-      <div class="section-heading">
+      <div class="section-heading section-heading--filterable">
         <div>
           <p class="eyebrow">The wider constellation</p>
           <h2 id="organizations-heading">Project organizations</h2>
         </div>
-        <p>Independent project homes with shared DNA: composability, reliability, and open development.</p>
+        <div class="project-filter">
+          <label for="project-filter">Find an organization</label>
+          <div class="project-filter__control">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+            <input id="project-filter" type="search" placeholder="Search names, topics, or purpose…" autocomplete="off" />
+          </div>
+          <p aria-live="polite"><strong id="project-count">{organizations.length}</strong> organizations shown</p>
+        </div>
       </div>
 
-      <div class="project-grid">
-        {organizations.map((project) => <ProjectCard {...project} />)}
+      <div class="project-grid" id="organization-grid">
+        {organizations.map((project) => <ProjectCard {...project} searchable />)}
       </div>
+      <p class="no-results" id="no-results" hidden>No matching organizations. Try another name, technology, or purpose.</p>
     </section>
 
     <section class="maker shell" aria-labelledby="maker-heading">
@@ -90,4 +98,27 @@ const description = 'Explore ORESoftware repositories and organizations spanning
   </main>
 
   <SiteFooter />
+
+  <script>
+    const filter = document.querySelector<HTMLInputElement>('#project-filter');
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-card="organization"]'));
+    const count = document.querySelector<HTMLElement>('#project-count');
+    const noResults = document.querySelector<HTMLElement>('#no-results');
+
+    const updateFilter = () => {
+      const query = filter?.value.trim().toLowerCase() ?? '';
+      let visible = 0;
+
+      for (const card of cards) {
+        const matches = !query || (card.dataset.search ?? '').includes(query);
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      }
+
+      if (count) count.textContent = String(visible);
+      if (noResults) noResults.hidden = visible !== 0;
+    };
+
+    filter?.addEventListener('input', updateFilter);
+  </script>
 </BaseLayout>

@@ -16,6 +16,6 @@ npm run validate
 npm run build
 ```
 
-GitHub Actions builds the Astro source and deploys `dist/` to GitHub Pages. The repository root also carries a checked-in static snapshot plus `.nojekyll` so the current branch-based Pages configuration continues to serve the redesigned site during the deployment migration.
+GitHub Actions validates the shared project catalog, builds the Astro source into `dist/`, and syncs that generated output to the repository root used by the current `main:/` GitHub Pages configuration. The checked-in root snapshot and `.nojekyll` keep Pages available during builds without introducing Jekyll or Hugo.
 
-Project cards are defined once in `src/data/projects.json` and rendered by Astro. Add or edit projects there rather than duplicating card markup.
+Project cards are defined once in `src/data/projects.json` and rendered by Astro. Add or edit projects there rather than duplicating card markup. The root fallback also reads that same catalog until the next generated Astro snapshot is published.

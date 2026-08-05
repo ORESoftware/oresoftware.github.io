@@ -17,6 +17,7 @@
   <title>ORESoftware — Open-source systems and developer tools</title>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="shell site-header__inner">
       <a class="wordmark" href="/" aria-label="ORESoftware home"><span class="wordmark__glyph" aria-hidden="true">O</span><span>ORESoftware</span></a>
@@ -26,11 +27,20 @@
         <details class="nav-menu nav-menu--wide"><summary>Organizations</summary><div id="org-menu" class="nav-menu__panel nav-menu__panel--grid"></div></details>
         <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
+      <details class="mobile-nav">
+        <summary>Menu <span aria-hidden="true">☰</span></summary>
+        <nav class="mobile-nav__panel" aria-label="Mobile navigation">
+          <a href="#featured">Popular repositories</a>
+          <a href="#organizations">Project organizations</a>
+          <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">ORESoftware on GitHub <span aria-hidden="true">↗</span></a>
+          <a href="https://the1mills.github.io" target="_blank" rel="noreferrer">Alex Mills <span aria-hidden="true">↗</span></a>
+        </nav>
+      </details>
       <a class="header-cta" href="https://the1mills.github.io" target="_blank" rel="noreferrer">Alex Mills <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="hero shell" aria-labelledby="hero-heading">
       <div class="hero__copy">
         <p class="eyebrow">Open source by ORESoftware</p>
@@ -58,11 +68,19 @@
     </section>
 
     <section id="organizations" class="projects-section projects-section--orgs shell" aria-labelledby="organizations-heading">
-      <div class="section-heading">
+      <div class="section-heading section-heading--filterable">
         <div><p class="eyebrow">The wider constellation</p><h2 id="organizations-heading">Project organizations</h2></div>
-        <p>Independent project homes with shared DNA: composability, reliability, and open development.</p>
+        <div class="project-filter">
+          <label for="project-filter">Find an organization</label>
+          <div class="project-filter__control">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+            <input id="project-filter" type="search" placeholder="Search names, topics, or purpose…" autocomplete="off">
+          </div>
+          <p aria-live="polite"><strong id="project-count">22</strong> organizations shown</p>
+        </div>
       </div>
       <div id="organization-grid" class="project-grid" aria-live="polite"></div>
+      <p class="no-results" id="no-results" hidden>No matching organizations. Try another name, technology, or purpose.</p>
     </section>
 
     <section class="maker shell" aria-labelledby="maker-heading">
@@ -80,76 +98,6 @@
     <div class="shell site-footer__bottom"><span>© 2026 ORESoftware</span><span>Small primitives. Ambitious systems.</span></div>
   </footer>
 
-  <script type="module">
-    const data = await fetch('/src/data/projects.json').then((response) => {
-      if (!response.ok) throw new Error(`Unable to load project data: ${response.status}`);
-      return response.json();
-    });
-
-    const initials = (name) => name.split('-').slice(0, 2).map((part) => part[0]?.toUpperCase()).join('');
-
-    const renderCard = (project) => {
-      const card = document.createElement('a');
-      card.className = 'project-card';
-      card.href = project.href;
-      card.target = '_blank';
-      card.rel = 'noreferrer';
-
-      const top = document.createElement('div');
-      top.className = 'project-card__topline';
-      const mark = document.createElement('span');
-      mark.className = 'project-card__mark';
-      mark.setAttribute('aria-hidden', 'true');
-      mark.textContent = initials(project.name);
-      const kind = document.createElement('span');
-      kind.className = 'project-card__kind';
-      kind.textContent = project.kind;
-      const arrow = document.createElement('span');
-      arrow.className = 'project-card__arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = '↗';
-      top.append(mark, kind, arrow);
-
-      const title = document.createElement('h3');
-      title.textContent = project.name;
-      const description = document.createElement('p');
-      description.textContent = project.description;
-      const tags = document.createElement('ul');
-      tags.className = 'tag-list';
-      tags.setAttribute('aria-label', `${project.name} topics`);
-      for (const tag of project.tags) {
-        const item = document.createElement('li');
-        item.textContent = tag;
-        tags.append(item);
-      }
-
-      card.append(top, title, description, tags);
-      return card;
-    };
-
-    const renderMenuLink = (project) => {
-      const link = document.createElement('a');
-      link.href = project.href;
-      link.target = '_blank';
-      link.rel = 'noreferrer';
-      link.append(project.name);
-      const arrow = document.createElement('span');
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.textContent = '↗';
-      link.append(arrow);
-      return link;
-    };
-
-    document.querySelector('#featured-grid').append(...data.featuredRepositories.map(renderCard));
-    document.querySelector('#organization-grid').append(...data.organizations.map(renderCard));
-    document.querySelector('#repo-menu').append(...data.featuredRepositories.map(renderMenuLink));
-    document.querySelector('#org-menu').append(...data.organizations.slice(0, 10).map(renderMenuLink));
-
-    const viewAll = document.createElement('a');
-    viewAll.className = 'nav-menu__all';
-    viewAll.href = '#organizations';
-    viewAll.innerHTML = 'View all organizations <span aria-hidden="true">↓</span>';
-    document.querySelector('#org-menu').append(viewAll);
-  </script>
+  <script type="module" src="/fallback.js"></script>
 </body>
 </html>

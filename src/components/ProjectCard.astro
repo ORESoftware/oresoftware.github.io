@@ -5,17 +5,26 @@ interface Props {
   kind: string;
   description: string;
   tags: string[];
+  searchable?: boolean;
 }
 
-const { name, href, kind, description, tags } = Astro.props;
+const { name, href, kind, description, tags, searchable = false } = Astro.props;
 const initials = name
   .split('-')
   .slice(0, 2)
   .map((part) => part[0]?.toUpperCase())
   .join('');
+const searchText = [name, kind, description, ...tags].join(' ').toLowerCase();
 ---
 
-<a class="project-card" href={href} target="_blank" rel="noreferrer">
+<a
+  class="project-card"
+  href={href}
+  target="_blank"
+  rel="noreferrer"
+  data-project-card={searchable ? 'organization' : undefined}
+  data-search={searchable ? searchText : undefined}
+>
   <div class="project-card__topline">
     <span class="project-card__mark" aria-hidden="true">{initials}</span>
     <span class="project-card__kind">{kind}</span>
