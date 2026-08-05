@@ -1,0 +1,75 @@
+name: Add or update a project card
+description: Propose a catalog entry for an ORESoftware repository or project organization.
+title: "Catalog: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Project cards are generated from `src/data/projects.json`. Supply the canonical metadata below so the change can be validated and published through Astro.
+
+  - type: input
+    id: name
+    attributes:
+      label: Repository or organization name
+      placeholder: usa-acc
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: Canonical GitHub URL
+      placeholder: https://github.com/usa-acc
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Card type
+      options:
+        - Organization
+        - Repository
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Brief project sneak peek
+      description: One concise sentence describing what the project builds or enables.
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Two topic tags
+      description: Provide two short, comma-separated tags.
+      placeholder: Open source, Acceleration
+    validations:
+      required: true
+
+  - type: textarea
+    id: tracking
+    attributes:
+      label: Tracking links
+      description: Include the matching Linear project or issue and any related GitHub implementation issue.
+      placeholder: |
+        Linear project: https://linear.app/...
+        Linear issue: https://linear.app/...
+        GitHub issue: https://github.com/...
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-publication checks
+      options:
+        - label: The GitHub destination exists and uses the intended capitalization.
+          required: true
+        - label: The description is factual and does not duplicate another card.
+          required: true
+        - label: I will run `npm run validate` and `npm run build` before merge.
+          required: true
