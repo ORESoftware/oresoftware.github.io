@@ -1,0 +1,51 @@
+---
+interface MenuItem {
+  name: string;
+  href: string;
+}
+
+interface Props {
+  repositories: MenuItem[];
+  organizations: MenuItem[];
+}
+
+const { repositories, organizations } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="shell site-header__inner">
+    <a class="wordmark" href="/" aria-label="ORESoftware home">
+      <span class="wordmark__glyph" aria-hidden="true">O</span>
+      <span>ORESoftware</span>
+    </a>
+
+    <nav class="primary-nav" aria-label="Primary navigation">
+      <a href="#projects">Projects</a>
+
+      <details class="nav-menu">
+        <summary>Popular repos</summary>
+        <div class="nav-menu__panel">
+          {repositories.map((item) => (
+            <a href={item.href} target="_blank" rel="noreferrer">{item.name}<span aria-hidden="true">↗</span></a>
+          ))}
+        </div>
+      </details>
+
+      <details class="nav-menu nav-menu--wide">
+        <summary>Organizations</summary>
+        <div class="nav-menu__panel nav-menu__panel--grid">
+          {organizations.slice(0, 10).map((item) => (
+            <a href={item.href} target="_blank" rel="noreferrer">{item.name}<span aria-hidden="true">↗</span></a>
+          ))}
+          <a class="nav-menu__all" href="#organizations">View all organizations <span aria-hidden="true">↓</span></a>
+        </div>
+      </details>
+
+      <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">GitHub</a>
+    </nav>
+
+    <a class="header-cta" href="https://the1mills.github.io" target="_blank" rel="noreferrer">
+      Alex Mills <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</header>
