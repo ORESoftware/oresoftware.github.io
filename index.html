@@ -136,14 +136,23 @@
 </section>
 <section aria-labelledby="ecosystem-title" class="section" id="ecosystem">
 <div class="shell">
-<div class="section-heading">
+<div class="section-heading ecosystem-heading">
 <div>
 <p class="eyebrow">Organization ecosystem</p>
 <h2 id="ecosystem-title">One workshop. Many ambitious systems.</h2>
 </div>
-<p class="section-description">Explore the expanding network of ORESoftware organizations. Each card is a direct path to its GitHub home and a quick look at what the project family is building.</p>
+<div class="ecosystem-tools">
+<p class="section-description">Explore the expanding network of ORESoftware organizations. Search by project name, technology, or purpose.</p>
+<label class="filter-label" for="project-filter">Find a project</label>
+<div class="filter-box">
+<svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
+<input autocomplete="off" id="project-filter" placeholder="Search names, tech, or purpose…" type="search"/>
 </div>
-<div class="card-grid" id="ecosystem-grid"></div>
+<p class="filter-status"><strong id="project-count">21</strong> organizations shown</p>
+</div>
+</div>
+<div aria-live="polite" class="card-grid" id="ecosystem-grid"></div>
+<p class="no-results" hidden id="no-results">No matching organizations. Try another project name or technology.</p>
 </div>
 </section>
 <section aria-labelledby="maker-title" class="maker" id="maker">
@@ -197,11 +206,11 @@
 </div>
 </div>
 <div class="footer-bottom">
-<span>© 2026 ORESoftware. Built in public.</span>
+<span>© <span id="current-year">2026</span> ORESoftware. Built in public.</span>
 <span>Designed to stay fast, responsive, and horizontally scroll-free.</span>
 </div>
 </div>
 </footer>
 
-<script defer="True" src="site.js"></script></body>
+<script defer src="site.js"></script></body>
 </html>
