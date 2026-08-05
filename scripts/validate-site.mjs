@@ -5,6 +5,7 @@ const root = resolve(import.meta.dirname, '..');
 const projects = JSON.parse(readFileSync(resolve(root, 'src/data/projects.json'), 'utf8'));
 const packageJson = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 const html = readFileSync(resolve(root, 'index.html'), 'utf8');
+const fallbackScript = readFileSync(resolve(root, 'fallback.js'), 'utf8');
 const astroPage = readFileSync(resolve(root, 'src/pages/index.astro'), 'utf8');
 const layout = readFileSync(resolve(root, 'src/layouts/BaseLayout.astro'), 'utf8');
 const header = readFileSync(resolve(root, 'src/components/SiteHeader.astro'), 'utf8');
@@ -57,6 +58,7 @@ const actualCards = projects.featuredRepositories.length + projects.organization
 const projectByName = new Map(
   [...projects.featuredRepositories, ...projects.organizations].map((project) => [project.name, project]),
 );
+const pageCopy = `${astroPage}\n${header}`.toLowerCase();
 
 const assertions = [
   [requiredFeaturedRepositories.every((name) => featuredNames.has(name)), 'all requested featured repositories are present'],
@@ -68,8 +70,9 @@ const assertions = [
   [workflow.includes('npm run validate') && workflow.includes('npm run build'), 'GitHub Actions validates and builds the Astro source'],
   [workflow.includes('npm run sync:pages'), 'GitHub Actions publishes the generated Astro output to Pages'],
   [astroPage.includes('featuredRepositories.map') && astroPage.includes('organizations.map'), 'Astro renders both project collections'],
-  [astroPage.includes('id="project-filter"') && astroPage.includes('data-project-card'), 'Astro provides organization search'],
-  [!astroPage.includes('project-count') && astroPage.includes('Core projects'), 'the homepage uses core-project framing without arbitrary totals'],
+  [astroPage.includes('id="project-filter"') && astroPage.includes('data-project-card'), 'Astro provides core-project search'],
+  [!astroPage.includes('project-count') && !fallbackScript.includes('project-count'), 'visible project counters are absent from source and fallback'],
+  [pageCopy.includes('core projects') && !pageCopy.includes('the wider constellation'), 'the homepage uses clean core-project framing'],
   [layout.includes('class="skip-link"'), 'Astro includes a keyboard skip link'],
   [header.includes('class="mobile-nav"') && header.includes('nav-menu'), 'the header has mobile navigation and dropdown menus'],
   [html.includes('https://the1mills.github.io'), 'the published Pages snapshot links to the1mills.github.io'],
@@ -78,9 +81,9 @@ const assertions = [
   [css.includes('overflow-x: hidden'), 'horizontal body overflow is guarded'],
   [css.includes('width: min(100%, 1928px)') && css.includes('object-position: center'), 'hero image is centered and constrained to its container'],
   [css.includes('--accent: #69b4ff'), 'the site uses the blue ORESoftware visual system'],
-  [projectByName.get('fanwaave')?.tags?.includes('Social / marketing'), 'fanwaave is categorized as Social / marketing'],
-  [projectByName.get('hypesiege')?.tags?.includes('Social / marketing'), 'hypesiege is categorized as Social / marketing'],
-  [projectByName.get('akrion-sim')?.tags?.includes('Gaming / simulation'), 'akrion-sim is categorized as Gaming / simulation'],
+  [projectByName.get('fanwaave')?.kind === 'Social / marketing', 'fanwaave is visibly categorized as Social / marketing'],
+  [projectByName.get('hypesiege')?.kind === 'Social / marketing', 'hypesiege is visibly categorized as Social / marketing'],
+  [projectByName.get('akrion-sim')?.kind === 'Gaming / simulation', 'akrion-sim is visibly categorized as Gaming / simulation'],
 ];
 
 const failures = assertions.filter(([passed]) => !passed);

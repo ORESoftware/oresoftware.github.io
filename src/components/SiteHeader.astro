@@ -20,7 +20,7 @@ const { repositories, organizations } = Astro.props;
     </a>
 
     <nav class="primary-nav" aria-label="Primary navigation">
-      <a href="#projects">Core projects</a>
+      <a href="#organizations">Core projects</a>
 
       <details class="nav-menu">
         <summary>Popular repos</summary>
@@ -37,7 +37,7 @@ const { repositories, organizations } = Astro.props;
           {organizations.slice(0, 10).map((item) => (
             <a href={item.href} target="_blank" rel="noreferrer">{item.name}<span aria-hidden="true">↗</span></a>
           ))}
-          <a class="nav-menu__all" href="#organizations">View all organizations <span aria-hidden="true">↓</span></a>
+          <a class="nav-menu__all" href="#organizations">View all core projects <span aria-hidden="true">↓</span></a>
         </div>
       </details>
 
@@ -47,8 +47,8 @@ const { repositories, organizations } = Astro.props;
     <details class="mobile-nav">
       <summary>Menu <span aria-hidden="true">☰</span></summary>
       <nav class="mobile-nav__panel" aria-label="Mobile navigation">
-        <a href="#featured">Core projects</a>
-        <a href="#organizations">Project organizations</a>
+        <a href="#featured">Popular repositories</a>
+        <a href="#organizations">Core projects</a>
         <a href="https://github.com/ORESoftware" target="_blank" rel="noreferrer">ORESoftware on GitHub <span aria-hidden="true">↗</span></a>
         <a href="https://the1mills.github.io" target="_blank" rel="noreferrer">Alex Mills <span aria-hidden="true">↗</span></a>
       </nav>
