@@ -65,22 +65,20 @@ document.querySelector('#repo-menu').append(...data.featuredRepositories.map(ren
 document.querySelector('#org-menu').append(...data.organizations.slice(0, 10).map(renderMenuLink));
 
 const filter = document.querySelector('#project-filter');
-const count = document.querySelector('#project-count');
 const noResults = document.querySelector('#no-results');
 filter.addEventListener('input', () => {
   const query = filter.value.trim().toLowerCase();
-  let visible = 0;
+  let hasMatches = false;
   for (const card of organizationCards) {
     const matches = !query || card.dataset.search.includes(query);
     card.hidden = !matches;
-    if (matches) visible += 1;
+    hasMatches ||= matches;
   }
-  count.textContent = String(visible);
-  noResults.hidden = visible !== 0;
+  noResults.hidden = hasMatches;
 });
 
 const viewAll = document.createElement('a');
 viewAll.className = 'nav-menu__all';
 viewAll.href = '#organizations';
-viewAll.innerHTML = 'View all organizations <span aria-hidden="true">↓</span>';
+viewAll.innerHTML = 'View all core projects <span aria-hidden="true">↓</span>';
 document.querySelector('#org-menu').append(viewAll);

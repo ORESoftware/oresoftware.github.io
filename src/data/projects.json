@@ -96,9 +96,9 @@
     {
       "name": "akrion-sim",
       "href": "https://github.com/akrion-sim",
-      "kind": "Organization",
+      "kind": "Gaming / simulation",
       "description": "Simulation tooling for exploring systems, scenarios, decisions, and agent behavior.",
-      "tags": ["Simulation", "Agents"]
+      "tags": ["Gaming", "Simulation"]
     },
     {
       "name": "declarative-migrations",
@@ -131,9 +131,9 @@
     {
       "name": "fanwaave",
       "href": "https://github.com/fanwaave",
-      "kind": "Organization",
-      "description": "Community and engagement software connecting creators, audiences, and live moments.",
-      "tags": ["Community", "Creators"]
+      "kind": "Social / marketing",
+      "description": "Community and marketing software connecting creators, audiences, campaigns, and live moments.",
+      "tags": ["Social", "Marketing"]
     },
     {
       "name": "evento-globolo",
@@ -145,9 +145,9 @@
     {
       "name": "hypesiege",
       "href": "https://github.com/hypesiege",
-      "kind": "Organization",
-      "description": "Social publishing workflows for planning, scheduling, and distributing campaigns.",
-      "tags": ["Social media", "Scheduling"]
+      "kind": "Social / marketing",
+      "description": "Social publishing workflows for planning, scheduling, and distributing marketing campaigns.",
+      "tags": ["Social", "Marketing", "Scheduling"]
     },
     {
       "name": "streempilot",

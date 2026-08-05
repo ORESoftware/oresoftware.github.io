@@ -1,6 +1,6 @@
 .site-footer {
   border-top: 1px solid var(--line);
-  background: rgba(4, 11, 20, 0.55);
+  background: rgba(4, 9, 18, 0.58);
 }
 
 .site-footer__grid {
@@ -35,7 +35,7 @@
 }
 
 .footer-links a:hover {
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .site-footer__bottom {
@@ -60,14 +60,6 @@
 
   .header-cta {
     margin-left: 0;
-  }
-
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
-  .hero__stats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .project-grid {
@@ -97,20 +89,16 @@
   }
 
   .hero {
-    gap: 30px;
-    padding-top: 64px;
+    gap: 28px;
+    padding-top: 62px;
   }
 
   h1 {
     font-size: clamp(2.75rem, 15vw, 4.4rem);
   }
 
-  .hero__stats {
-    grid-template-columns: 1fr;
-  }
-
   .hero-logo-shell {
-    margin-top: 10px;
+    margin-top: 6px;
     border-radius: 16px;
   }
 
@@ -126,7 +114,7 @@
 
   .projects-section,
   .projects-section--orgs {
-    padding-top: 78px;
+    padding-top: 76px;
   }
 
   .project-grid {
@@ -134,14 +122,14 @@
   }
 
   .project-card {
-    min-height: 260px;
+    min-height: 250px;
   }
 
   .maker {
     align-items: stretch;
     flex-direction: column;
-    margin-top: 80px;
-    margin-bottom: 80px;
+    margin-top: 78px;
+    margin-bottom: 78px;
   }
 
   .site-footer__grid {

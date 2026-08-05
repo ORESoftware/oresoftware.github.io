@@ -1,10 +1,10 @@
 .projects-section {
-  padding-top: 80px;
+  padding-top: 82px;
   scroll-margin-top: 96px;
 }
 
 .projects-section--orgs {
-  padding-top: 110px;
+  padding-top: 106px;
 }
 
 .section-heading {
@@ -18,7 +18,7 @@
 .section-heading h2,
 .maker h2 {
   margin: 0;
-  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  font-size: clamp(2.2rem, 5vw, 4.25rem);
   line-height: 1;
   letter-spacing: -0.055em;
 }
@@ -52,13 +52,13 @@
   gap: 10px;
   padding-inline: 13px;
   border: 1px solid var(--line-strong);
-  border-radius: 13px;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.035);
 }
 
 .project-filter__control:focus-within {
-  border-color: rgba(120, 231, 199, 0.55);
-  box-shadow: 0 0 0 3px rgba(120, 231, 199, 0.08);
+  border-color: rgba(79, 140, 255, 0.62);
+  box-shadow: 0 0 0 3px rgba(79, 140, 255, 0.11);
 }
 
 .project-filter__control svg {
@@ -87,16 +87,6 @@
   color: #77889d;
 }
 
-.project-filter > p {
-  margin: 7px 0 0;
-  color: var(--muted);
-  font-size: 0.74rem;
-}
-
-.project-filter strong {
-  color: var(--accent);
-}
-
 .no-results {
   margin: 22px 0 0;
   padding: 24px;
@@ -116,9 +106,9 @@
   position: relative;
   display: flex;
   min-width: 0;
-  min-height: 285px;
+  min-height: 270px;
   flex-direction: column;
-  padding: 23px;
+  padding: 22px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-md);
@@ -137,23 +127,23 @@
   height: 185px;
   border-radius: 50%;
   content: "";
-  background: rgba(120, 231, 199, 0.065);
+  background: rgba(79, 140, 255, 0.07);
   filter: blur(2px);
   transition: transform 220ms ease, background 220ms ease;
 }
 
 .project-card:hover {
   z-index: 1;
-  transform: translateY(-5px);
-  border-color: rgba(120, 231, 199, 0.42);
+  transform: translateY(-3px);
+  border-color: rgba(79, 140, 255, 0.45);
   background:
-    linear-gradient(160deg, rgba(120, 231, 199, 0.08), transparent 48%),
+    linear-gradient(160deg, rgba(79, 140, 255, 0.09), transparent 48%),
     var(--panel-strong);
 }
 
 .project-card:hover::after {
-  transform: scale(1.18);
-  background: rgba(159, 156, 255, 0.1);
+  transform: scale(1.15);
+  background: rgba(115, 199, 255, 0.1);
 }
 
 .project-card__topline {
@@ -170,10 +160,10 @@
   height: 39px;
   flex: 0 0 auto;
   place-items: center;
-  border: 1px solid rgba(120, 231, 199, 0.28);
-  border-radius: 12px;
+  border: 1px solid rgba(79, 140, 255, 0.34);
+  border-radius: 11px;
   color: var(--accent-strong);
-  background: rgba(120, 231, 199, 0.075);
+  background: rgba(79, 140, 255, 0.1);
   font-size: 0.75rem;
   font-weight: 850;
   letter-spacing: 0.04em;
@@ -196,13 +186,13 @@
 
 .project-card:hover .project-card__arrow {
   transform: translate(3px, -3px);
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
 .project-card h3 {
   position: relative;
   z-index: 1;
-  margin: 26px 0 10px;
+  margin: 24px 0 10px;
   font-size: 1.35rem;
   line-height: 1.15;
   letter-spacing: -0.035em;
@@ -224,7 +214,7 @@
   flex-wrap: wrap;
   gap: 7px;
   margin: auto 0 0;
-  padding: 24px 0 0;
+  padding: 22px 0 0;
   list-style: none;
 }
 
@@ -243,15 +233,15 @@
   align-items: end;
   justify-content: space-between;
   gap: 36px;
-  margin-top: 110px;
-  margin-bottom: 110px;
-  padding: clamp(28px, 5vw, 52px);
-  border: 1px solid rgba(120, 231, 199, 0.25);
+  margin-top: 106px;
+  margin-bottom: 106px;
+  padding: clamp(28px, 5vw, 50px);
+  border: 1px solid rgba(79, 140, 255, 0.3);
   border-radius: var(--radius-lg);
   background:
-    radial-gradient(circle at 100% 0%, rgba(159, 156, 255, 0.18), transparent 30rem),
-    radial-gradient(circle at 0% 100%, rgba(120, 231, 199, 0.14), transparent 30rem),
-    rgba(15, 31, 51, 0.78);
+    radial-gradient(circle at 100% 0%, rgba(115, 199, 255, 0.13), transparent 30rem),
+    radial-gradient(circle at 0% 100%, rgba(79, 140, 255, 0.14), transparent 30rem),
+    rgba(12, 27, 48, 0.8);
   box-shadow: var(--shadow);
 }
 
@@ -262,4 +252,3 @@
 .maker p:not(.eyebrow) {
   margin-top: 18px;
 }
-
