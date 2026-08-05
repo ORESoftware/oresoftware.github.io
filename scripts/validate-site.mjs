@@ -3,35 +3,84 @@ import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 const projects = JSON.parse(readFileSync(resolve(root, 'src/data/projects.json'), 'utf8'));
+const packageJson = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
 const html = readFileSync(resolve(root, 'index.html'), 'utf8');
-const fallbackScript = readFileSync(resolve(root, 'fallback.js'), 'utf8');
 const astroPage = readFileSync(resolve(root, 'src/pages/index.astro'), 'utf8');
 const layout = readFileSync(resolve(root, 'src/layouts/BaseLayout.astro'), 'utf8');
 const header = readFileSync(resolve(root, 'src/components/SiteHeader.astro'), 'utf8');
+const astroConfig = readFileSync(resolve(root, 'astro.config.mjs'), 'utf8');
+const workflow = readFileSync(resolve(root, '.github/workflows/deploy.yml'), 'utf8');
 const css = [
-  'site.css',
-  'styles/core.css',
-  'styles/hero.css',
-  'styles/projects.css',
-  'styles/footer-responsive.css',
+  'public/site.css',
+  'public/styles/core.css',
+  'public/styles/hero.css',
+  'public/styles/projects.css',
+  'public/styles/footer-responsive.css',
 ].map((path) => readFileSync(resolve(root, path), 'utf8')).join('\n');
-const expectedCards = projects.featuredRepositories.length + projects.organizations.length;
+
+const requiredFeaturedRepositories = [
+  'live-mutex',
+  'sumanjs',
+  'flags-2-env',
+  'r2g',
+];
+
+const requiredOrganizations = [
+  'fiducia-cloud',
+  'cliptown',
+  'sonus-auris',
+  'memebank',
+  'daedalus-fab',
+  'quaestor-ledger',
+  'scintilla-run',
+  '3fa-app',
+  'zed-pkg',
+  'akrion-sim',
+  'declarative-migrations',
+  'discrete-event-systems',
+  'drone-mngr',
+  'embedded-alerts',
+  'fanwaave',
+  'evento-globolo',
+  'hypesiege',
+  'streempilot',
+  'file-tunnel',
+  'opto-sync',
+  'sagitta-stack',
+  'usa-acc',
+];
+
+const featuredNames = new Set(projects.featuredRepositories.map((project) => project.name));
+const organizationNames = new Set(projects.organizations.map((project) => project.name));
+const expectedCards = requiredFeaturedRepositories.length + requiredOrganizations.length;
+const actualCards = projects.featuredRepositories.length + projects.organizations.length;
+const projectByName = new Map(
+  [...projects.featuredRepositories, ...projects.organizations].map((project) => [project.name, project]),
+);
 
 const assertions = [
-  [projects.organizations.some((project) => project.name === 'usa-acc'), 'usa-acc is present in project data'],
-  [expectedCards === 26, 'the catalog contains all 26 requested cards'],
+  [requiredFeaturedRepositories.every((name) => featuredNames.has(name)), 'all requested featured repositories are present'],
+  [requiredOrganizations.every((name) => organizationNames.has(name)), 'all requested organizations, including usa-acc, are present'],
+  [actualCards === expectedCards, `the catalog contains all ${expectedCards} requested cards`],
+  [Boolean(packageJson.devDependencies?.astro), 'Astro is installed as the site framework'],
+  [packageJson.scripts?.build?.includes('astro build'), 'the production build runs Astro'],
+  [astroConfig.includes("output: 'static'"), 'Astro is configured for static output'],
+  [workflow.includes('npm run validate') && workflow.includes('npm run build'), 'GitHub Actions validates and builds the Astro source'],
+  [workflow.includes('npm run sync:pages'), 'GitHub Actions publishes the generated Astro output to Pages'],
   [astroPage.includes('featuredRepositories.map') && astroPage.includes('organizations.map'), 'Astro renders both project collections'],
   [astroPage.includes('id="project-filter"') && astroPage.includes('data-project-card'), 'Astro provides organization search'],
+  [!astroPage.includes('project-count') && astroPage.includes('Core projects'), 'the homepage uses core-project framing without arbitrary totals'],
   [layout.includes('class="skip-link"'), 'Astro includes a keyboard skip link'],
-  [header.includes('class="mobile-nav"'), 'the header has mobile navigation'],
-  [html.includes('src="/fallback.js"'), 'the legacy Pages fallback loads its module'],
-  [fallbackScript.includes("fetch('/src/data/projects.json')"), 'the legacy Pages fallback uses the shared project catalog'],
-  [html.includes('id="project-filter"') && fallbackScript.includes("querySelector('#project-filter')"), 'the legacy Pages fallback preserves organization search'],
-  [html.includes('https://the1mills.github.io'), 'the1mills.github.io is linked'],
-  [html.includes('/img/img.png'), 'the existing ORESoftware image is used'],
+  [header.includes('class="mobile-nav"') && header.includes('nav-menu'), 'the header has mobile navigation and dropdown menus'],
+  [html.includes('https://the1mills.github.io'), 'the published Pages snapshot links to the1mills.github.io'],
+  [html.includes('/img/img.png'), 'the published Pages snapshot uses the ORESoftware image'],
   [css.includes('grid-template-columns: repeat(3, minmax(0, 1fr))'), 'desktop grid is three columns'],
   [css.includes('overflow-x: hidden'), 'horizontal body overflow is guarded'],
-  [css.includes('width: min(100%, 1928px)'), 'hero image is constrained to its container'],
+  [css.includes('width: min(100%, 1928px)') && css.includes('object-position: center'), 'hero image is centered and constrained to its container'],
+  [css.includes('--accent: #69b4ff'), 'the site uses the blue ORESoftware visual system'],
+  [projectByName.get('fanwaave')?.tags?.includes('Social / marketing'), 'fanwaave is categorized as Social / marketing'],
+  [projectByName.get('hypesiege')?.tags?.includes('Social / marketing'), 'hypesiege is categorized as Social / marketing'],
+  [projectByName.get('akrion-sim')?.tags?.includes('Gaming / simulation'), 'akrion-sim is categorized as Gaming / simulation'],
 ];
 
 const failures = assertions.filter(([passed]) => !passed);
