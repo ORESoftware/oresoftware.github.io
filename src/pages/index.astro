@@ -1,0 +1,93 @@
+---
+import ProjectCard from '../components/ProjectCard.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import projects from '../data/projects.json';
+
+const { featuredRepositories, organizations } = projects;
+const title = 'ORESoftware — Open-source systems and developer tools';
+const description = 'Explore ORESoftware repositories and organizations spanning distributed systems, developer tooling, synchronization, media, infrastructure, and more.';
+---
+
+<BaseLayout title={title} description={description}>
+  <SiteHeader repositories={featuredRepositories} organizations={organizations} />
+
+  <main>
+    <section class="hero shell" aria-labelledby="hero-heading">
+      <div class="hero__copy">
+        <p class="eyebrow">Open source by ORESoftware</p>
+        <h1 id="hero-heading">Build the hard parts once. Share them everywhere.</h1>
+        <p class="hero__lede">
+          A growing portfolio of developer tools, distributed systems, synchronization layers,
+          infrastructure, and product experiments—designed to interoperate and built in public.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#projects">Explore the projects <span aria-hidden="true">↓</span></a>
+          <a class="button button--secondary" href="https://the1mills.github.io" target="_blank" rel="noreferrer">
+            Meet the mastermind <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero__stats" aria-label="Project portfolio summary">
+        <div><strong>{featuredRepositories.length}</strong><span>popular repositories</span></div>
+        <div><strong>{organizations.length}</strong><span>project organizations</span></div>
+        <div><strong>Astro</strong><span>static, fast, and accessible</span></div>
+      </div>
+
+      <div class="hero-logo-shell">
+        <img
+          class="hero-logo"
+          src="/img/img.png"
+          width="1928"
+          height="262"
+          alt="ORESoftware"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </section>
+
+    <section id="projects" class="projects-section shell" aria-labelledby="featured-heading">
+      <div id="featured" class="section-heading">
+        <div>
+          <p class="eyebrow">Start here</p>
+          <h2 id="featured-heading">Popular repositories</h2>
+        </div>
+        <p>Focused tools that solve reusable engineering problems and anchor the wider ecosystem.</p>
+      </div>
+
+      <div class="project-grid">
+        {featuredRepositories.map((project) => <ProjectCard {...project} />)}
+      </div>
+    </section>
+
+    <section id="organizations" class="projects-section projects-section--orgs shell" aria-labelledby="organizations-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">The wider constellation</p>
+          <h2 id="organizations-heading">Project organizations</h2>
+        </div>
+        <p>Independent project homes with shared DNA: composability, reliability, and open development.</p>
+      </div>
+
+      <div class="project-grid">
+        {organizations.map((project) => <ProjectCard {...project} />)}
+      </div>
+    </section>
+
+    <section class="maker shell" aria-labelledby="maker-heading">
+      <div>
+        <p class="eyebrow">Behind the work</p>
+        <h2 id="maker-heading">Designed and driven by Alex Mills.</h2>
+        <p>Follow the ideas, experiments, and engineering notes behind ORESoftware.</p>
+      </div>
+      <a class="button button--primary" href="https://the1mills.github.io" target="_blank" rel="noreferrer">
+        Visit the1mills.github.io <span aria-hidden="true">↗</span>
+      </a>
+    </section>
+  </main>
+
+  <SiteFooter />
+</BaseLayout>
