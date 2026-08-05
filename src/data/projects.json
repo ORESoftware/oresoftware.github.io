@@ -135,11 +135,11 @@
     {
       "name": "akrion-sim",
       "href": "https://github.com/akrion-sim",
-      "kind": "Organization",
+      "kind": "Gaming / simulation",
       "description": "Gaming and simulation tooling for exploring systems, scenarios, decisions, and agent behavior.",
       "tags": [
-        "Gaming / simulation",
-        "Agents"
+        "Agents",
+        "Optimal control"
       ]
     },
     {
@@ -185,11 +185,11 @@
     {
       "name": "fanwaave",
       "href": "https://github.com/fanwaave",
-      "kind": "Organization",
+      "kind": "Social / marketing",
       "description": "Social and marketing software connecting creators, audiences, campaigns, and live moments.",
       "tags": [
-        "Social / marketing",
-        "Creators"
+        "Creators",
+        "Community"
       ]
     },
     {
@@ -205,11 +205,11 @@
     {
       "name": "hypesiege",
       "href": "https://github.com/hypesiege",
-      "kind": "Organization",
+      "kind": "Social / marketing",
       "description": "Social and marketing workflows for planning, scheduling, and distributing campaigns.",
       "tags": [
-        "Social / marketing",
-        "Scheduling"
+        "Scheduling",
+        "Campaigns"
       ]
     },
     {

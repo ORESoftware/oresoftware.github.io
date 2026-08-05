@@ -23,7 +23,7 @@ const description = 'Explore ORESoftware repositories and organizations spanning
           infrastructure, and product experiments—designed to interoperate and built in public.
         </p>
         <div class="hero__actions">
-          <a class="button button--primary" href="#projects">Explore the projects <span aria-hidden="true">↓</span></a>
+          <a class="button button--primary" href="#organizations">Explore core projects <span aria-hidden="true">↓</span></a>
           <a class="button button--secondary" href="https://the1mills.github.io" target="_blank" rel="noreferrer">
             Meet the mastermind <span aria-hidden="true">↗</span>
           </a>
@@ -59,10 +59,10 @@ const description = 'Explore ORESoftware repositories and organizations spanning
     <section id="projects" class="projects-section shell" aria-labelledby="featured-heading">
       <div id="featured" class="section-heading">
         <div>
-          <p class="eyebrow">Start here</p>
-          <h2 id="featured-heading">Core projects</h2>
+          <p class="eyebrow">Popular repositories</p>
+          <h2 id="featured-heading">Established tools.</h2>
         </div>
-        <p>Popular ORESoftware repositories that solve reusable engineering problems and anchor the wider ecosystem.</p>
+        <p>Focused open-source projects for concurrency, testing, configuration, and release confidence.</p>
       </div>
 
       <div class="project-grid">
@@ -73,23 +73,23 @@ const description = 'Explore ORESoftware repositories and organizations spanning
     <section id="organizations" class="projects-section projects-section--orgs shell" aria-labelledby="organizations-heading">
       <div class="section-heading section-heading--filterable">
         <div>
-          <p class="eyebrow">The wider constellation</p>
-          <h2 id="organizations-heading">Project organizations</h2>
+          <p class="eyebrow">Core projects</p>
+          <h2 id="organizations-heading">A connected portfolio of systems and products.</h2>
         </div>
         <div class="project-filter">
-          <label for="project-filter">Find an organization</label>
+          <label for="project-filter">Filter core projects</label>
           <div class="project-filter__control">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
-            <input id="project-filter" type="search" placeholder="Search names, topics, or purpose…" autocomplete="off" />
+            <input id="project-filter" type="search" placeholder="Search names, technologies, or purpose…" autocomplete="off" />
           </div>
-          <p>Filter the cards by name, purpose, or technology.</p>
+          <p>Browse by project, domain, or technology.</p>
         </div>
       </div>
 
       <div class="project-grid" id="organization-grid">
         {organizations.map((project) => <ProjectCard {...project} searchable />)}
       </div>
-      <p class="no-results" id="no-results" hidden>No matching organizations. Try another name, technology, or purpose.</p>
+      <p class="no-results" id="no-results" hidden>No matching projects. Try another name, technology, or area.</p>
     </section>
 
     <section class="maker shell" aria-labelledby="maker-heading">
@@ -113,15 +113,15 @@ const description = 'Explore ORESoftware repositories and organizations spanning
 
     const updateFilter = () => {
       const query = filter?.value.trim().toLowerCase() ?? '';
-      let visible = 0;
+      let hasMatches = false;
 
       for (const card of cards) {
         const matches = !query || (card.dataset.search ?? '').includes(query);
         card.hidden = !matches;
-        if (matches) visible += 1;
+        hasMatches ||= matches;
       }
 
-      if (noResults) noResults.hidden = visible !== 0;
+      if (noResults) noResults.hidden = hasMatches;
     };
 
     filter?.addEventListener('input', updateFilter);
