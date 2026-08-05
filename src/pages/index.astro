@@ -30,11 +30,16 @@ const description = 'Explore ORESoftware repositories and organizations spanning
         </div>
       </div>
 
-      <div class="hero__stats" aria-label="Project portfolio summary">
-        <div><strong>{featuredRepositories.length}</strong><span>popular repositories</span></div>
-        <div><strong>{organizations.length}</strong><span>project organizations</span></div>
-        <div><strong>Astro</strong><span>static, fast, and accessible</span></div>
-      </div>
+      <aside class="hero__signals" aria-label="Core ORESoftware project areas">
+        <p class="hero__signals-title">Core project areas</p>
+        <ul>
+          <li>Developer tooling</li>
+          <li>Distributed systems</li>
+          <li>Local-first products</li>
+          <li>Cloud infrastructure</li>
+        </ul>
+        <span>Designed to work together. Built with Astro.</span>
+      </aside>
 
       <div class="hero-logo-shell">
         <img
@@ -45,6 +50,8 @@ const description = 'Explore ORESoftware repositories and organizations spanning
           alt="ORESoftware"
           loading="eager"
           decoding="async"
+          fetchpriority="high"
+          draggable="false"
         />
       </div>
     </section>
@@ -53,9 +60,9 @@ const description = 'Explore ORESoftware repositories and organizations spanning
       <div id="featured" class="section-heading">
         <div>
           <p class="eyebrow">Start here</p>
-          <h2 id="featured-heading">Popular repositories</h2>
+          <h2 id="featured-heading">Core projects</h2>
         </div>
-        <p>Focused tools that solve reusable engineering problems and anchor the wider ecosystem.</p>
+        <p>Popular ORESoftware repositories that solve reusable engineering problems and anchor the wider ecosystem.</p>
       </div>
 
       <div class="project-grid">
@@ -75,7 +82,7 @@ const description = 'Explore ORESoftware repositories and organizations spanning
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m16.5 16.5 4 4"></path></svg>
             <input id="project-filter" type="search" placeholder="Search names, topics, or purpose…" autocomplete="off" />
           </div>
-          <p aria-live="polite"><strong id="project-count">{organizations.length}</strong> organizations shown</p>
+          <p>Filter the cards by name, purpose, or technology.</p>
         </div>
       </div>
 
@@ -102,7 +109,6 @@ const description = 'Explore ORESoftware repositories and organizations spanning
   <script>
     const filter = document.querySelector<HTMLInputElement>('#project-filter');
     const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-project-card="organization"]'));
-    const count = document.querySelector<HTMLElement>('#project-count');
     const noResults = document.querySelector<HTMLElement>('#no-results');
 
     const updateFilter = () => {
@@ -115,7 +121,6 @@ const description = 'Explore ORESoftware repositories and organizations spanning
         if (matches) visible += 1;
       }
 
-      if (count) count.textContent = String(visible);
       if (noResults) noResults.hidden = visible !== 0;
     };
 
