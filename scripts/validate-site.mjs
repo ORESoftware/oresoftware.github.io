@@ -11,6 +11,8 @@ const layout = readFileSync(resolve(root, 'src/layouts/BaseLayout.astro'), 'utf8
 const header = readFileSync(resolve(root, 'src/components/SiteHeader.astro'), 'utf8');
 const astroConfig = readFileSync(resolve(root, 'astro.config.mjs'), 'utf8');
 const workflow = readFileSync(resolve(root, '.github/workflows/deploy.yml'), 'utf8');
+const playwrightConfig = readFileSync(resolve(root, 'playwright.config.mjs'), 'utf8');
+const browserTests = readFileSync(resolve(root, 'tests/pages.spec.mjs'), 'utf8');
 const css = [
   'public/site.css',
   'public/styles/core.css',
@@ -59,6 +61,7 @@ const projectByName = new Map(
   [...projects.featuredRepositories, ...projects.organizations].map((project) => [project.name, project]),
 );
 const pageCopy = `${astroPage}\n${header}`.toLowerCase();
+const browserTestRunsBeforePublish = workflow.indexOf('npm run test:e2e') < workflow.indexOf('npm run sync:pages');
 
 const assertions = [
   [requiredFeaturedRepositories.every((name) => featuredNames.has(name)), 'all requested featured repositories are present'],
@@ -84,6 +87,15 @@ const assertions = [
   [projectByName.get('fanwaave')?.kind === 'Social / marketing', 'fanwaave is visibly categorized as Social / marketing'],
   [projectByName.get('hypesiege')?.kind === 'Social / marketing', 'hypesiege is visibly categorized as Social / marketing'],
   [projectByName.get('akrion-sim')?.kind === 'Gaming / simulation', 'akrion-sim is visibly categorized as Gaming / simulation'],
+  [packageJson.scripts?.['test:e2e'] === 'playwright test', 'the repository exposes a Playwright browser-test command'],
+  [Boolean(packageJson.devDependencies?.['@playwright/test']), 'Playwright is installed for browser regression testing'],
+  [workflow.includes('npx playwright install --with-deps chromium') && workflow.includes('npm run test:e2e'), 'GitHub Actions installs Chromium and runs browser tests'],
+  [browserTestRunsBeforePublish, 'browser regression tests run before the Pages snapshot is published'],
+  [playwrightConfig.includes('PAGES_BASE_URL'), 'the Playwright harness can target an independently deployed Pages URL'],
+  [playwrightConfig.includes("name: 'desktop'") && playwrightConfig.includes("name: 'tablet'") && playwrightConfig.includes("name: 'mobile'"), 'browser tests cover desktop, tablet, and mobile viewports'],
+  [browserTests.includes('scrollWidth') && browserTests.includes('gridTemplateColumns'), 'browser tests enforce overflow and responsive-grid invariants'],
+  [browserTests.includes('#project-filter') && browserTests.includes('definitely-not-an-oresoftware-project'), 'browser tests exercise catalog filtering and the empty state'],
+  [browserTests.includes('https://the1mills.github.io') && browserTests.includes('https://github.com/fiducia-cloud'), 'browser tests protect creator and organization link contracts'],
 ];
 
 const failures = assertions.filter(([passed]) => !passed);

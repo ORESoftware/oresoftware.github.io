@@ -18,9 +18,11 @@ The root `.nojekyll` file exists only to stop GitHub Pages from applying Jekyll 
 | `src/data/projects.json` | Single source of truth for featured repositories and organization cards. |
 | `public/` | Static assets copied into the Astro build. |
 | `styles/` | Split CSS modules imported by `site.css`. |
-| `scripts/validate-site.mjs` | Structural checks for required catalog and layout behavior. |
+| `playwright.config.mjs` | Defines local and remote browser-test targets plus desktop, tablet, and mobile viewports. |
+| `tests/pages.spec.mjs` | Browser regressions for overflow, banner centering, responsive grids, filtering, navigation, links, and document semantics. |
+| `scripts/validate-site.mjs` | Structural checks for required catalog, layout, publication, and browser-test behavior. |
 | `scripts/sync-pages.mjs` | Copies generated `dist/` output to the branch root used by Pages. |
-| `.github/workflows/deploy.yml` | Validates, builds, and publishes the Astro output. |
+| `.github/workflows/deploy.yml` | Validates, builds, browser-tests, and publishes the Astro output. |
 
 ## Catalog model
 
@@ -55,29 +57,56 @@ npm install
 npm run dev
 ```
 
+Install the Chromium browser used by the regression suite once per environment:
+
+```bash
+npx playwright install chromium
+```
+
 ## Required validation
 
-Run both commands before publishing a catalog or layout change:
+Run all three commands before publishing a catalog or layout change:
 
 ```bash
 npm run validate
 npm run build
+npm run test:e2e
 ```
 
-The validator checks the required catalog entries, the three-column desktop rule, creator links, banner constraints, and overflow guards. The production build confirms that Astro can generate the static site.
+The structural validator checks the required catalog entries, the three-column desktop rule, creator links, banner constraints, overflow guards, and browser-test wiring. The production build confirms that Astro can generate the static site. Playwright then opens the built site at desktop, tablet, and mobile widths and verifies behavior in a real Chromium browser.
+
+To run the same browser suite against an already deployed site, set `PAGES_BASE_URL` instead of starting the local Astro preview server:
+
+```bash
+PAGES_BASE_URL=https://oresoftware.github.io npm run test:e2e
+```
 
 ## Deployment
 
-Pull requests run validation and a production Astro build. After a change reaches `main`, the workflow:
+Pull requests run validation, a production Astro build, and the browser regression suite. After a change reaches `main`, the workflow:
 
 1. installs dependencies;
 2. runs structural validation;
 3. builds Astro into `dist/`;
-4. syncs the generated files to the repository root;
-5. commits the generated Pages snapshot with `[skip ci]`;
-6. allows GitHub Pages to serve the updated root snapshot.
+4. installs the pinned Chromium runtime;
+5. runs the desktop, tablet, and mobile browser suite;
+6. syncs the generated files to the repository root only after those checks pass;
+7. commits the generated Pages snapshot with `[skip ci]`;
+8. allows GitHub Pages to serve the updated root snapshot.
 
 The checked-in snapshot keeps the current `main:/` Pages configuration operational. Astro source remains authoritative; generated root files should not be hand-edited.
+
+## Independent production monitoring
+
+The source-repository workflow protects changes before publication. A separate workflow in `embedded-alerts-test/accessibility-e2e` provides an independent production lane from a `*-test` organization:
+
+- it checks out the browser harness from this repository;
+- it sets `PAGES_BASE_URL=https://oresoftware.github.io`;
+- it runs the same responsive and accessibility-oriented contracts against the deployed site;
+- it supports manual dispatch and a scheduled cadence;
+- it uploads Playwright traces, screenshots, videos, and the HTML report when a check fails.
+
+Keeping the independent lane outside the production repository catches publication drift and verifies that the public URL—not merely the local build—continues to satisfy the site contracts.
 
 ## Catalog update checklist
 
@@ -85,8 +114,8 @@ The checked-in snapshot keeps the current `main:/` Pages configuration operation
 2. Confirm the GitHub destination exists and uses the intended capitalization.
 3. Keep descriptions factual, brief, and distinct.
 4. Keep tags useful for filtering and scanning.
-5. Run validation and the production build.
+5. Run structural validation, the production build, and browser tests.
 6. Open a pull request and wait for checks.
 7. Merge only after checks pass.
-8. Confirm the live Pages publication.
+8. Confirm the live Pages publication and the next independent production check.
 9. Update the repository tracking issue and the matching Linear GitHub-owner project.
