@@ -8,6 +8,7 @@
     "build": "astro build && node scripts/copy-images.mjs",
     "preview": "astro preview",
     "sync:pages": "node scripts/sync-pages.mjs",
+    "test:e2e": "playwright test",
     "validate": "node scripts/validate-site.mjs"
   },
   "engines": {
@@ -15,6 +16,7 @@
     "npm": ">=9.6.5"
   },
   "devDependencies": {
+    "@playwright/test": "1.62.0",
     "astro": "7.1.6"
   }
 }
