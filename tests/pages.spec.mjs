@@ -231,16 +231,22 @@ test('publishes all twenty-two factors with the encrypted-config and delivery co
     await expect(page.locator(`#${id}`), `missing factor anchor: ${id}`).toHaveCount(1);
   }
 
-  const configurationExample = page.locator('.manifesto-config__example code');
-  const configurationText = await configurationExample.textContent();
+  const configurationText = await page.locator('.manifesto-config__example code').textContent();
   expect(configurationText).toContain('enc/');
   expect(configurationText).toContain('dev.env.enc');
   expect(configurationText).toContain('dec/');
   expect(configurationText).toContain('.env → env/dec/dev.env');
-  await expect(page.getByText(/Fiducia Cloud supplies no more than one or two external bootstrap secrets/)).toBeVisible();
-  await expect(page.getByText(/Package to OCI standards, not to a Docker dependency/)).toBeVisible();
-  await expect(page.getByText(/Rebase private work; merge shared history/)).toBeVisible();
-  await expect(page.getByText('An extension, not an official replacement')).toBeVisible();
+
+  const bootstrapText = await page.locator('#bootstrap-secrets').textContent();
+  expect(bootstrapText).toContain('Fiducia Cloud');
+  expect(bootstrapText).toContain('one or two secrets');
+
+  const ociText = await page.locator('#oci-artifacts').textContent();
+  expect(ociText).toContain('Package to OCI standards, not to a Docker dependency.');
+
+  const historyText = await page.locator('#history-integration').textContent();
+  expect(historyText).toContain('Rebase private work; merge shared history.');
+  await expect(page.locator('#independent-heading')).toHaveText('An extension, not an official replacement');
 
   const overflow = await page.evaluate(() => ({
     viewport: window.innerWidth,
