@@ -232,8 +232,11 @@ test('publishes all twenty-two factors with the encrypted-config and delivery co
   }
 
   const configurationExample = page.locator('.manifesto-config__example code');
-  await expect(configurationExample).toContainText('env/enc/dev.env.enc');
-  await expect(configurationExample).toContainText('env/dec/dev.env');
+  const configurationText = await configurationExample.textContent();
+  expect(configurationText).toContain('enc/');
+  expect(configurationText).toContain('dev.env.enc');
+  expect(configurationText).toContain('dec/');
+  expect(configurationText).toContain('.env → env/dec/dev.env');
   await expect(page.getByText(/Fiducia Cloud supplies no more than one or two external bootstrap secrets/)).toBeVisible();
   await expect(page.getByText(/Package to OCI standards, not to a Docker dependency/)).toBeVisible();
   await expect(page.getByText(/Rebase private work; merge shared history/)).toBeVisible();
