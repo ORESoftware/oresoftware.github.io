@@ -104,6 +104,59 @@ jobs:
             git push origin HEAD:main
           fi
 
+  verify_live:
+    if: github.event_name == 'push' && github.ref_name == 'main' && contains(github.event.head_commit.message, '[verify-22-factor-live]')
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Verify the public 22-factor endpoint
+        shell: bash
+        env:
+          LIVE_URL: https://oresoftware.github.io/22-factor-app/
+        run: |
+          set -euo pipefail
+          response="$(mktemp)"
+          trap 'rm -f "$response"' EXIT
+          verified=0
+
+          for attempt in $(seq 1 12); do
+            status="$(curl --silent --show-error --location --max-time 20 --output "$response" --write-out '%{http_code}' "$LIVE_URL" || true)"
+            if [ "$status" = "200" ] \
+              && grep -Fq 'The 22-Factor App' "$response" \
+              && grep -Fq 'env/enc/dev.env.enc' "$response" \
+              && grep -Fq 'id="history-integration"' "$response"; then
+              verified=1
+              break
+            fi
+            echo "Attempt ${attempt}: endpoint not ready or content contract incomplete (HTTP ${status:-none})."
+            sleep 5
+          done
+
+          test "$verified" = "1"
+          echo "Verified ${LIVE_URL}: HTTP 200 and required manifesto contracts are present."
+
+      - name: Record successful public verification
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LIVE_URL: https://oresoftware.github.io/22-factor-app/
+        run: |
+          set -euo pipefail
+          body="$(cat <<EOF
+          ## Public endpoint verified
+
+          GitHub-hosted smoke verification reached ${LIVE_URL} with HTTP 200 and confirmed the rendered 22-Factor title, encrypted env/enc contract, and Factor XXII history-integration anchor.
+
+          - Commit: ${GITHUB_SHA}
+          - Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}
+          EOF
+          )"
+          gh issue comment 6 --repo "$GITHUB_REPOSITORY" --body "$body"
+
   publish:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/site-v')
     needs: build
