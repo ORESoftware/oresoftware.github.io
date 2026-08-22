@@ -34,6 +34,7 @@ const requiredLinks = [
   'https://github.com/sagitta-stack',
   'https://github.com/usa-acc',
   'https://the1mills.github.io',
+  '/22-factor-app/',
 ];
 
 const expectedCardCount = 26;
@@ -201,6 +202,76 @@ test('preserves basic accessible document contracts', async ({ page }) => {
   expect(defects).toEqual({
     duplicateIds: [],
     imagesWithoutAlt: [],
+    unsafeBlankTargets: [],
+  });
+});
+
+test('publishes all twenty-two factors with the encrypted-config and delivery contracts', async ({ page }) => {
+  const response = await page.goto('/22-factor-app/', { waitUntil: 'domcontentloaded' });
+  expect(response, 'the 22-factor route should return an HTTP response').not.toBeNull();
+  expect(response?.ok(), `unexpected manifesto status: ${response?.status()}`).toBeTruthy();
+
+  await expect(page.locator('h1')).toHaveText('The 22-Factor App');
+  await expect(page.locator('.manifesto-factor')).toHaveCount(22);
+  await expect(page.locator('.manifesto-factor--extension')).toHaveCount(10);
+  await expect(page.locator('.manifesto-index__item')).toHaveCount(22);
+
+  for (const id of [
+    'encrypted-configuration',
+    'bootstrap-secrets',
+    'oci-artifacts',
+    'isolation-boundaries',
+    'immutable-infrastructure',
+    'recoverable-connections',
+    'tag-based-releases',
+    'human-authority',
+    'code-review',
+    'history-integration',
+  ]) {
+    await expect(page.locator(`#${id}`), `missing factor anchor: ${id}`).toHaveCount(1);
+  }
+
+  const configurationText = await page.locator('.manifesto-config__example code').textContent();
+  expect(configurationText).toContain('enc/');
+  expect(configurationText).toContain('dev.env.enc');
+  expect(configurationText).toContain('dec/');
+  expect(configurationText).toContain('.env → env/dec/dev.env');
+
+  const bootstrapText = await page.locator('#bootstrap-secrets').textContent();
+  expect(bootstrapText).toContain('Fiducia Cloud');
+  expect(bootstrapText).toContain('one or two secrets');
+
+  const ociText = await page.locator('#oci-artifacts').textContent();
+  expect(ociText).toContain('Package to OCI standards, not to a Docker dependency.');
+
+  const historyText = await page.locator('#history-integration').textContent();
+  expect(historyText).toContain('Rebase private work; merge shared history.');
+  await expect(page.locator('#independent-heading')).toHaveText('An extension, not an official replacement');
+
+  const overflow = await page.evaluate(() => ({
+    viewport: window.innerWidth,
+    documentWidth: document.documentElement.scrollWidth,
+    bodyWidth: document.body.scrollWidth,
+  }));
+
+  expect(overflow.documentWidth, JSON.stringify(overflow)).toBeLessThanOrEqual(overflow.viewport + 1);
+  expect(overflow.bodyWidth, JSON.stringify(overflow)).toBeLessThanOrEqual(overflow.viewport + 1);
+
+  const defects = await page.evaluate(() => {
+    const ids = [...document.querySelectorAll('[id]')].map((element) => element.id);
+    const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
+    const unsafeBlankTargets = [...document.querySelectorAll('a[target="_blank"]')]
+      .filter((anchor) => !anchor.rel.split(/\s+/).includes('noreferrer'))
+      .map((anchor) => anchor.getAttribute('href'));
+
+    return {
+      duplicateIds: [...new Set(duplicateIds)],
+      unsafeBlankTargets,
+    };
+  });
+
+  expect(defects).toEqual({
+    duplicateIds: [],
     unsafeBlankTargets: [],
   });
 });

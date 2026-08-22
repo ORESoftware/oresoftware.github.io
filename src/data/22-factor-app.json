@@ -1,0 +1,355 @@
+{
+  "title": "The 22-Factor App",
+  "version": "0.1.0",
+  "status": "working-draft",
+  "updated": "2026-08-21",
+  "license": "CC BY 4.0 for original ORESoftware text; linked sources retain their own licenses",
+  "description": "An independent ORESoftware extension of the Twelve-Factor methodology for secure, portable, recoverable, and human-accountable cloud systems.",
+  "factors": [
+    {
+      "number": 1,
+      "roman": "I",
+      "slug": "codebase",
+      "name": "Codebase",
+      "generation": "foundation",
+      "maxim": "One authoritative codebase; every deploy is a version of it.",
+      "summary": "Keep application source and the declarations needed to reproduce it in one revision-controlled lineage. Environments are deploys of that lineage, not copied repositories that quietly diverge.",
+      "practices": [
+        "Trace every running instance to a commit and immutable release identifier.",
+        "Keep migrations, configuration schemas, and deployment declarations beside the code they govern.",
+        "Treat forks as contributions and experiments, not separate production codebases."
+      ]
+    },
+    {
+      "number": 2,
+      "roman": "II",
+      "slug": "dependencies",
+      "name": "Dependencies",
+      "generation": "foundation",
+      "maxim": "Declare, lock, verify, and isolate every dependency.",
+      "summary": "An app must not depend on undeclared software that happens to exist on a laptop or host image. Manifests and lock data make builds repeatable; isolation prevents ambient packages from changing behavior.",
+      "practices": [
+        "Commit dependency manifests and deterministic lock data.",
+        "Verify provenance, checksums, licenses, and known vulnerabilities before release.",
+        "Run through the declared toolchain rather than globally installed packages."
+      ]
+    },
+    {
+      "number": 3,
+      "roman": "III",
+      "slug": "configuration",
+      "name": "Configuration",
+      "generation": "foundation",
+      "maxim": "Separate deploy-varying configuration from application code.",
+      "summary": "Code should be identical across deploys. Track configuration names, types, defaults, and validation rules while supplying environment-specific values through explicit release or runtime interfaces.",
+      "practices": [
+        "Fail fast when required configuration is missing or malformed.",
+        "Do not hide deployment policy in source constants or environment-name branches.",
+        "Keep settings orthogonal so one value can change without rebuilding unrelated configuration."
+      ]
+    },
+    {
+      "number": 4,
+      "roman": "IV",
+      "slug": "backing-services",
+      "name": "Backing Services",
+      "generation": "foundation",
+      "maxim": "Treat databases, queues, caches, and APIs as attached resources.",
+      "summary": "Reach backing services through configuration and stable contracts. A managed service, self-hosted service, or test double should be replaceable without changing core application code.",
+      "practices": [
+        "Put addresses and credentials behind typed configuration.",
+        "Define timeouts, retry budgets, health checks, and failure behavior for every dependency.",
+        "Exercise replacement, failover, backup, and restore paths before they are needed."
+      ]
+    },
+    {
+      "number": 5,
+      "roman": "V",
+      "slug": "build-release-run",
+      "name": "Build, Release, Run",
+      "generation": "foundation",
+      "maxim": "Build once, release deliberately, and run the exact artifact.",
+      "summary": "Compilation and packaging produce an immutable artifact. A release binds that artifact to reviewed configuration and migration intent. Runtime starts the already-created release and never edits it in place.",
+      "practices": [
+        "Promote the same artifact digest through environments instead of rebuilding it.",
+        "Give every release an immutable identity covering code, artifact, configuration, and schema intent.",
+        "Make migrations explicit, observable, and recoverable release steps."
+      ]
+    },
+    {
+      "number": 6,
+      "roman": "VI",
+      "slug": "processes",
+      "name": "Processes",
+      "generation": "foundation",
+      "maxim": "Run as stateless, share-nothing processes.",
+      "summary": "Processes may be created, moved, or destroyed at any time. Durable data belongs in backing services; memory and local files are caches or temporary workspace, never the only copy of important state.",
+      "practices": [
+        "Make handlers idempotent where retries or duplicate delivery are possible.",
+        "Do not depend on sticky sessions for correctness.",
+        "Keep local filesystem writes disposable, bounded, and safe to lose."
+      ]
+    },
+    {
+      "number": 7,
+      "roman": "VII",
+      "slug": "port-binding",
+      "name": "Port Binding",
+      "generation": "foundation",
+      "maxim": "Expose services through explicit ports and protocols.",
+      "summary": "The app publishes its network interface directly. The platform routes traffic to that interface instead of requiring an implicit application server or machine-specific integration.",
+      "practices": [
+        "Bind to an explicit, configurable, unprivileged port.",
+        "Publish protocol, health, readiness, and shutdown contracts.",
+        "Keep routing, TLS termination, and discovery in the platform boundary."
+      ]
+    },
+    {
+      "number": 8,
+      "roman": "VIII",
+      "slug": "concurrency",
+      "name": "Concurrency",
+      "generation": "foundation",
+      "maxim": "Scale independent process types independently.",
+      "summary": "Model web serving, background work, scheduling, streaming, and administration as explicit process types. Scale horizontally and coordinate work through queues, partitions, or leases.",
+      "practices": [
+        "Give each process type independent limits and autoscaling signals.",
+        "Use backpressure and bounded queues so load cannot become unbounded memory growth.",
+        "Protect singleton duties with leases or fencing."
+      ]
+    },
+    {
+      "number": 9,
+      "roman": "IX",
+      "slug": "disposability",
+      "name": "Disposability",
+      "generation": "foundation",
+      "maxim": "Start quickly, stop gracefully, and survive interruption.",
+      "summary": "Processes should become ready promptly and handle termination as an ordinary event. Work remains correct across crashes, rolling replacements, preemption, and duplicate delivery.",
+      "practices": [
+        "Stop taking new work and finish or safely abandon in-flight work within a deadline.",
+        "Use acknowledgements, leases, and idempotency so interrupted work can resume.",
+        "Test abrupt termination as well as graceful shutdown."
+      ]
+    },
+    {
+      "number": 10,
+      "roman": "X",
+      "slug": "environment-parity",
+      "name": "Environment Parity",
+      "generation": "foundation",
+      "maxim": "Keep development, test, staging, and production materially alike.",
+      "summary": "Reduce differences in people, time, tooling, service versions, and artifact shape. Local substitutes are useful only when compatibility is continuously checked against production contracts.",
+      "practices": [
+        "Use the same locked dependencies, migrations, and release artifact everywhere.",
+        "Keep deployment automation available to developers and exercise it frequently.",
+        "Run contract and end-to-end tests against production-equivalent backing services."
+      ]
+    },
+    {
+      "number": 11,
+      "roman": "XI",
+      "slug": "logs",
+      "name": "Logs",
+      "generation": "foundation",
+      "maxim": "Emit structured event streams; let the platform route and retain them.",
+      "summary": "Write machine-parseable events to standard output or another explicit telemetry interface. The application does not manage log files, retention, or destination-specific transports.",
+      "practices": [
+        "Include severity, service identity, release identity, and trace or correlation IDs.",
+        "Never emit secrets, decrypted configuration, session tokens, or unnecessary personal data.",
+        "Keep routing, indexing, retention, and alerting outside the process."
+      ]
+    },
+    {
+      "number": 12,
+      "roman": "XII",
+      "slug": "admin-tasks",
+      "name": "Admin Tasks",
+      "generation": "foundation",
+      "maxim": "Run maintenance work as auditable one-off processes.",
+      "summary": "Migrations, repairs, imports, and diagnostics run from the same code and dependency set as the release they affect, with the same identity and configuration boundaries.",
+      "practices": [
+        "Version admin commands with the application and make them safe to retry.",
+        "Record operator, inputs, release, start, completion, and outcome.",
+        "Use locks, leases, or fencing for operations that must not overlap."
+      ]
+    },
+    {
+      "number": 13,
+      "roman": "XIII",
+      "slug": "encrypted-configuration",
+      "name": "Encrypted Configuration",
+      "generation": "extension",
+      "maxim": "Commit ciphertext; materialize plaintext only at the point of use.",
+      "summary": "Extend Factor III by tracking approved SOPS-encrypted dotenv files under env/enc/ while keeping plaintext local and disposable. Decrypt atomically into ignored env/dec/*.env files, memory, or tmpfs—never image layers, logs, caches, or artifacts.",
+      "practices": [
+        "Allowlist exact paths such as env/enc/dev.env.enc and env/enc/prod.env.enc.",
+        "Ignore env/dec/ completely; create owner-only files and replace them atomically after validation.",
+        "Keep decryption identities outside the repository and separate development, production, and recovery recipients.",
+        "Use keyless CI checks to reject tracked plaintext, broad encryption rules, symlink escapes, and malformed ciphertext.",
+        "Rotate application credentials after access removal or compromise because old Git objects remain history."
+      ]
+    },
+    {
+      "number": 14,
+      "roman": "XIV",
+      "slug": "bootstrap-secrets",
+      "name": "Bootstrap Secrets",
+      "generation": "extension",
+      "maxim": "Keep the off-repository trust root deliberately tiny.",
+      "summary": "Use Fiducia Cloud for only one or two secrets that cannot safely be represented as repository ciphertext—typically a bootstrap credential, root-key reference, or emergency recovery capability. Prefer workload identity and short-lived leases.",
+      "practices": [
+        "Do not mirror the entire application configuration in both Fiducia Cloud and env/enc/.",
+        "Scope reads to one workload, one environment, and the minimum secret names required.",
+        "Audit every read and rotation; expire bootstrap material quickly and fail closed.",
+        "Avoid circular bootstrap that requires another long-lived secret to fetch the first.",
+        "Keep break-glass access separately controlled, time-bounded, and reviewed after use."
+      ]
+    },
+    {
+      "number": 15,
+      "roman": "XV",
+      "slug": "oci-artifacts",
+      "name": "OCI Artifacts",
+      "generation": "extension",
+      "maxim": "Package to OCI standards, not to a Docker dependency.",
+      "summary": "The production contract is an Open Container Initiative image, runtime bundle, and distribution interface. The Docker daemon, Docker CLI, Dockerfile, and Docker Hub are not required build, release, registry, or runtime dependencies.",
+      "practices": [
+        "Build with an OCI-native daemonless toolchain and run with an OCI-conformant runtime.",
+        "Pin deployments to content digests, never mutable image names alone.",
+        "Generate an SBOM and attach signed provenance and policy attestations.",
+        "Use minimal, non-root, read-only images with explicit capabilities and limits.",
+        "Promote the same verified digest through environments."
+      ]
+    },
+    {
+      "number": 16,
+      "roman": "XVI",
+      "slug": "isolation-boundaries",
+      "name": "Isolation Boundaries",
+      "generation": "extension",
+      "maxim": "Match the isolation boundary to the workload’s risk.",
+      "summary": "A standard OCI process container is not the only choice. Trusted single-tenant code may use namespaces and cgroups; untrusted or multi-tenant code may require a userspace kernel, lightweight VM, microVM, virtual OS, or full VM.",
+      "practices": [
+        "Document the threat model, tenant boundary, kernel exposure, and performance budget.",
+        "Use gVisor, Kata Containers, Firecracker, or a full VM when risk warrants stronger isolation.",
+        "Avoid privileged containers and host namespace sharing; grant capabilities individually.",
+        "Test escape resistance, syscall compatibility, and degraded-mode behavior.",
+        "Make isolation level an explicit deployment property."
+      ]
+    },
+    {
+      "number": 17,
+      "roman": "XVII",
+      "slug": "immutable-infrastructure",
+      "name": "Immutable Infrastructure",
+      "generation": "extension",
+      "maxim": "Replace infrastructure; do not repair it in place.",
+      "summary": "Hosts, nodes, and base images are versioned artifacts. Build and test an AMI on AWS—or the equivalent machine image elsewhere—then create replacement capacity instead of patching long-lived machines through SSH.",
+      "practices": [
+        "Build, scan, test, and sign machine images in an automated pipeline.",
+        "Prohibit untracked in-place mutation and treat drift as a replacement signal.",
+        "Keep durable state in managed backing services or explicitly replicated volumes.",
+        "Promote the same image identifier and retain known-good rollback images.",
+        "Rehearse node replacement, rebalancing, and disaster recovery."
+      ]
+    },
+    {
+      "number": 18,
+      "roman": "XVIII",
+      "slug": "recoverable-connections",
+      "name": "Recoverable Connections",
+      "generation": "extension",
+      "maxim": "Treat every TCP or WebSocket connection as interruptible, drainable, and resumable.",
+      "summary": "Long-lived connections are temporary transport, not durable state. During rollout or failure, servers stop accepting new sessions, advertise unready status, drain within a deadline, complete the close handshake, and let clients reconnect without corrupting work.",
+      "practices": [
+        "Use heartbeats, idle deadlines, bounded buffers, backpressure, and per-connection limits.",
+        "Reconnect with randomized exponential backoff and a retry budget to avoid a recovery stampede.",
+        "Use resumable cursors or session tokens, message IDs, idempotency keys, and duplicate suppression.",
+        "Keep session state in a backing service; affinity may help locality but must not be required.",
+        "For stateful stores, define and test quorum, fencing, backup, restore, and failover ownership."
+      ]
+    },
+    {
+      "number": 19,
+      "roman": "XIX",
+      "slug": "tag-based-releases",
+      "name": "Tag-Based Releases",
+      "generation": "extension",
+      "maxim": "Branches are proposals; protected Git tags are releases.",
+      "summary": "Branches can build and test, but production deployment begins only from a protected, annotated or signed release tag pointing to a reviewed commit. The tag resolves to immutable artifact digests, machine images, migration intent, and evidence.",
+      "practices": [
+        "Use a documented tag namespace such as vX.Y.Z or site-vX.Y.Z.",
+        "Restrict tag creation, updates, and deletion and record approval evidence.",
+        "Promote already-built artifacts instead of rebuilding per environment.",
+        "Reject deployment from mutable branch heads or mutable image tags.",
+        "Rollback by selecting a prior release tag and its original artifacts."
+      ]
+    },
+    {
+      "number": 20,
+      "roman": "XX",
+      "slug": "human-authority",
+      "name": "Human Authority",
+      "generation": "extension",
+      "maxim": "Automate evidence; keep accountable humans in control of consequential decisions.",
+      "summary": "Automation prepares diffs, tests, risk analysis, rollout plans, and recommendations. Humans retain explicit authority for production, security, privacy, financial, destructive, and otherwise irreversible actions according to a documented risk tier.",
+      "practices": [
+        "Show reviewers the exact change, evidence, blast radius, observability, and rollback plan.",
+        "Require an independent approver and two-person control for high-risk releases and destructive operations.",
+        "Do not let an agent, bot, or change author satisfy its own approval.",
+        "Pre-authorize low-risk reversible classes only through a reviewed narrow policy.",
+        "Make emergency access time-limited, fully audited, and retrospectively reviewed."
+      ]
+    },
+    {
+      "number": 21,
+      "roman": "XXI",
+      "slug": "code-review",
+      "name": "Code Review",
+      "generation": "extension",
+      "maxim": "Ship small, evidence-backed changes reviewed by the right owners.",
+      "summary": "A pull request should express one coherent change and make intent, risk, tests, migration behavior, operational effects, and rollback strategy understandable. Automated and AI review supplement independent human review; they do not replace ownership.",
+      "practices": [
+        "Keep changes focused and separate unrelated refactors from behavior changes.",
+        "Request code-owner, domain, security, or data review according to risk.",
+        "Review design, correctness, failure modes, tests, observability, migrations, and documentation.",
+        "Resolve substantive discussions and make generated or binary changes inspectable.",
+        "Respond promptly, distinguish blocking findings from optional polish, and record decisions."
+      ]
+    },
+    {
+      "number": 22,
+      "roman": "XXII",
+      "slug": "history-integration",
+      "name": "History Integration",
+      "generation": "extension",
+      "maxim": "Rebase private work; merge shared history.",
+      "summary": "Rebase or squash unpublished local commits when that clarifies a private branch. Once work is shared, reviewed, protected, or released, preserve its identity and integrate it through the repository’s documented merge policy.",
+      "practices": [
+        "Never rewrite protected branches, public release tags, or commits collaborators may use.",
+        "Prefer a merge commit when topology, attribution, and semantic integration matter.",
+        "Allow squash merges for truly atomic routine changes when repository policy permits.",
+        "Resolve conflicts conceptually, never by choosing ours or theirs blindly, then rerun checks.",
+        "Place release tags on the final integrated commit, not a pre-merge branch tip."
+      ]
+    }
+  ],
+  "sources": [
+    {"name": "The Twelve-Factor App", "href": "https://12factor.net/", "note": "The original twelve factors and their historical context."},
+    {"name": "Twelve-Factor modernization repository", "href": "https://github.com/twelve-factor/twelve-factor", "note": "The community-led work updating the original manifesto."},
+    {"name": "ORESoftware SOPS environment-file standard", "href": "https://github.com/ORESoftware/.github/blob/main/docs/sops-environment-standard.md", "note": "The exact env/enc and env/dec operating profile used here."},
+    {"name": "Fiducia Cloud", "href": "https://github.com/fiducia-cloud", "note": "The narrow external-secret and distributed trust service in Factor XIV."},
+    {"name": "SOPS documentation", "href": "https://getsops.io/docs/", "note": "Encrypted dotenv and structured configuration with identity-based key access."},
+    {"name": "Open Container Initiative", "href": "https://opencontainers.org/", "note": "Open image, runtime, and distribution specifications."},
+    {"name": "gVisor", "href": "https://gvisor.dev/docs/", "note": "A userspace application kernel and OCI runtime for sandboxed containers."},
+    {"name": "Kata Containers", "href": "https://katacontainers.io/", "note": "OCI-compatible containers backed by lightweight virtual machines."},
+    {"name": "Firecracker", "href": "https://firecracker-microvm.github.io/", "note": "A minimal KVM-based microVM monitor for multi-tenant workloads."},
+    {"name": "AWS EC2 Image Builder", "href": "https://docs.aws.amazon.com/imagebuilder/latest/userguide/what-is-image-builder.html", "note": "Automated, tested machine-image and AMI pipelines."},
+    {"name": "Kubernetes Pod lifecycle", "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/", "note": "Termination, readiness, and connection-draining behavior."},
+    {"name": "RFC 6455: The WebSocket Protocol", "href": "https://www.rfc-editor.org/rfc/rfc6455.html", "note": "Closing handshakes, ping/pong, and reconnect backoff."},
+    {"name": "GitHub repository rulesets", "href": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets", "note": "Controls for branches, tags, required reviews, and protected history."},
+    {"name": "Google Engineering Practices: Code Review", "href": "https://google.github.io/eng-practices/review/", "note": "Small changes, reviewer responsibilities, and review quality."},
+    {"name": "Git: The Perils of Rebasing", "href": "https://git-scm.com/book/en/v2/Git-Branching-Rebasing.html", "note": "Why published shared commits should not be rewritten."}
+  ]
+}
