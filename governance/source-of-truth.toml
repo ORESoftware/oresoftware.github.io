@@ -1,0 +1,10 @@
+schemaVersion = "ores.organization-source-of-truth-pointer.v1"
+organization = "ORESoftware"
+authorityRepository = "ORESoftware/.github"
+canonicalPath = "governance/source-of-truth.toml"
+canonicalRevision = 1
+observedAt = "2026-09-07T21:38:42Z"
+status = "unverified"
+mirrorRepository = "ORESoftware/oresoftware.github.io"
+mirrorMode = "pointer"
+note = "Marketing copy must preserve superseded direction in a historical/non-interactive record rather than silently deleting it. Canonical revision 1 is proposed by ORESoftware/.github#31 until merged and digest-verified."
